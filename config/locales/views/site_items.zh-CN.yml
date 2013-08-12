@@ -1,0 +1,35 @@
+---
+zh-CN:
+  site_items:
+    index:
+      title: 网站标题
+    show:
+      title: 网站
+    edit:
+      title: 编辑网站
+    new:
+      title: 新建网站
+  flash:
+    site_items:
+      create:
+        notice: ! '%{resource_name} was successfully created.'
+      update:
+        notice: ! '%{resource_name} was successfully updated.'
+      destroy:
+        notice: ! '%{resource_name} was successfully deleted.'
+        alert: ! '%{resource_name} could not be deleted.'
+  simple_form:
+    labels:
+      site_item:
+        site_title: '网站标题'
+        site_url: '网站地址'
+        site_username: '网站用户名'
+        site_password: '网站用密码'
+        site_password_tips: '密码提示'
+        note: '备注'
+        tag_list: '标签 '
+        visit_count: '访问次数'
+        rate_count: '评级数'
+    hints:
+      site_items:
+        site_title: '填入网站标题'
