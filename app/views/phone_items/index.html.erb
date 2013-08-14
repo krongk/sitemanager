@@ -1,0 +1,43 @@
+<h1>Listing phone_items</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Mobile</th>
+    <th>Source name</th>
+    <th>Name</th>
+    <th>City</th>
+    <th>Area</th>
+    <th>Description</th>
+    <th>Note</th>
+    <th>Is processed</th>
+    <th>Send count</th>
+    <th>Account</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @phone_items.each do |phone_item| %>
+  <tr>
+    <td><%= phone_item.user %></td>
+    <td><%= phone_item.mobile %></td>
+    <td><%= phone_item.source_name %></td>
+    <td><%= phone_item.name %></td>
+    <td><%= phone_item.city %></td>
+    <td><%= phone_item.area %></td>
+    <td><%= phone_item.description %></td>
+    <td><%= phone_item.note %></td>
+    <td><%= phone_item.is_processed %></td>
+    <td><%= phone_item.send_count %></td>
+    <td><%= phone_item.account_id %></td>
+    <td><%= link_to 'Show', phone_item %></td>
+    <td><%= link_to 'Edit', edit_phone_item_path(phone_item) %></td>
+    <td><%= link_to 'Destroy', phone_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Phone item', new_phone_item_path %>

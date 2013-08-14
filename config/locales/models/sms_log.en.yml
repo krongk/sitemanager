@@ -1,0 +1,16 @@
+---
+en:
+  active_record:
+    models:
+      sms_log: Sms log
+    attributes:
+      sms_log:
+        user: User
+        sms_tmp: Sms tmp
+        resource: Resource
+        resource_id: Resource
+        status: Status
+    errors:
+      sms_log: 
+  helpers:
+    sms_log: 

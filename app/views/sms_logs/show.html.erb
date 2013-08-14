@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @sms_log.user %>
+</p>
+
+<p>
+  <b>Sms tmp:</b>
+  <%= @sms_log.sms_tmp %>
+</p>
+
+<p>
+  <b>Resource:</b>
+  <%= @sms_log.resource %>
+</p>
+
+<p>
+  <b>Resource:</b>
+  <%= @sms_log.resource_id %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @sms_log.status %>
+</p>
+
+
+<%= link_to 'Edit', edit_sms_log_path(@sms_log) %> |
+<%= link_to 'Back', sms_logs_path %>

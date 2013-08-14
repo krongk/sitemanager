@@ -1,0 +1,20 @@
+---
+zh-CN:
+  sms_logs:
+    index:
+      title: Sms logs
+    show:
+      title: Sms log
+    edit:
+      title: Editing Sms log
+    new:
+      title: New Sms log
+  flash:
+    sms_logs:
+      create:
+        notice: ! '%{resource_name} was successfully created.'
+      update:
+        notice: ! '%{resource_name} was successfully updated.'
+      destroy:
+        notice: ! '%{resource_name} was successfully deleted.'
+        alert: ! '%{resource_name} could not be deleted.'

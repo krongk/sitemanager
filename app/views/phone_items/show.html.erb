@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @phone_item.user %>
+</p>
+
+<p>
+  <b>Mobile:</b>
+  <%= @phone_item.mobile %>
+</p>
+
+<p>
+  <b>Source name:</b>
+  <%= @phone_item.source_name %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @phone_item.name %>
+</p>
+
+<p>
+  <b>City:</b>
+  <%= @phone_item.city %>
+</p>
+
+<p>
+  <b>Area:</b>
+  <%= @phone_item.area %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @phone_item.description %>
+</p>
+
+<p>
+  <b>Note:</b>
+  <%= @phone_item.note %>
+</p>
+
+<p>
+  <b>Is processed:</b>
+  <%= @phone_item.is_processed %>
+</p>
+
+<p>
+  <b>Send count:</b>
+  <%= @phone_item.send_count %>
+</p>
+
+<p>
+  <b>Account:</b>
+  <%= @phone_item.account_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_phone_item_path(@phone_item) %> |
+<%= link_to 'Back', phone_items_path %>

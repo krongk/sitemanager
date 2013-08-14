@@ -1,0 +1,27 @@
+<h1>Listing sms_tmps</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Title</th>
+    <th>Content</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sms_tmps.each do |sms_tmp| %>
+  <tr>
+    <td><%= sms_tmp.user %></td>
+    <td><%= sms_tmp.title %></td>
+    <td><%= sms_tmp.content %></td>
+    <td><%= link_to 'Show', sms_tmp %></td>
+    <td><%= link_to 'Edit', edit_sms_tmp_path(sms_tmp) %></td>
+    <td><%= link_to 'Destroy', sms_tmp, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Sms tmp', new_sms_tmp_path %>

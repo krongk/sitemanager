@@ -5,12 +5,12 @@ class << Rails.application
     if Rails.env == 'development'
        "121.199.46.174:3005"
     else
-      "www.yufuwu.org"
+      "www.65960.com"
     end
   end
 
   def name
-    "雨服务"
+    "65960"
    end
 end
 

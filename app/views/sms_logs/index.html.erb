@@ -1,0 +1,31 @@
+<h1>Listing sms_logs</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Sms tmp</th>
+    <th>Resource</th>
+    <th>Resource</th>
+    <th>Status</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sms_logs.each do |sms_log| %>
+  <tr>
+    <td><%= sms_log.user %></td>
+    <td><%= sms_log.sms_tmp %></td>
+    <td><%= sms_log.resource %></td>
+    <td><%= sms_log.resource_id %></td>
+    <td><%= sms_log.status %></td>
+    <td><%= link_to 'Show', sms_log %></td>
+    <td><%= link_to 'Edit', edit_sms_log_path(sms_log) %></td>
+    <td><%= link_to 'Destroy', sms_log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Sms log', new_sms_log_path %>
