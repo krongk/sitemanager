@@ -8,6 +8,8 @@ class HomeController < ApplicationController
   end
 
   def sms
+  	@sms_tmp = SmsTmp.new
+    @resource_item = ResourceItem.new
   end
 
   def email

@@ -30,19 +30,20 @@ gem "quiet_assets", ">= 1.0.2", :group => :development
 gem "figaro", ">= 0.6.3"
 gem "better_errors", ">= 0.7.2", :group => :development
 gem "binding_of_caller", ">= 0.7.1", :group => :development, :platforms => [:mri_19, :rbx]
+gem 'acts-as-taggable-on', '>=2.4.1'
+gem 'roo', '>=1.11.2' #Excel processing
 
-gem 'acts-as-taggable-on'
 #not for windows but for linux
- gem "libv8", ">= 3.11.8"
- gem "therubyracer", ">= 0.11.3", :group => :assets, :platform => :ruby, :require => "v8"
+# gem "libv8", ">= 3.11.8"
+# gem "therubyracer", ">= 0.11.3", :group => :assets, :platform => :ruby, :require => "v8"
 
 #==I18n
 	# Central point to collect locale data for use in Ruby on Rails.
 	# Add below to config to include only I18n which you want:
 	# 	config.i18n.available_locales = ['es-CO', :de]
-gem 'rails-i18n', '~> 0.1.8'
+#gem 'rails-i18n', '~> 0.1.8'
 	# Creates yaml locale files for models and views when using the model / scaffold_controller generators.
-gem 'i18n_yaml_generator', '~> 0.0.1'
+#gem 'i18n_yaml_generator', '~> 0.0.1'
 
 #===Chinese Misic
 gem 'chinese_pinyin'

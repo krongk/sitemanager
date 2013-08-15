@@ -1,21 +1,21 @@
----
+#encoding: utf-8
 zh-CN:
-  active_record:
+  activerecord:
     models:
-      phone_item: Phone item
+      phone_item: 手机号码
     attributes:
       phone_item:
-        user: User
-        mobile: Mobile
-        source_name: Source name
-        name: Name
-        city: City
-        area: Area
-        description: Description
-        note: Note
-        is_processed: Is processed
-        send_count: Send count
-        account_id: Account
+        user: 所有者
+        mobile: 手机号
+        source_name: 来源
+        name: 姓名
+        city: 城市
+        area: 地区
+        description: 描述
+        note: 备注
+        is_processed: 执行
+        send_count: 发送次数
+        account_id: 联系人ID
     errors:
       phone_item: 
   helpers:

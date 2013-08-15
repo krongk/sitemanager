@@ -1,15 +1,15 @@
----
+#encoding: utf-8
 zh-CN:
-  active_record:
+  activerecord:
     models:
-      sms_log: Sms log
+      sms_log: 短信日志
     attributes:
       sms_log:
-        user: User
-        sms_tmp: Sms tmp
-        resource: Resource
-        resource_id: Resource
-        status: Status
+        user: 所有者
+        sms_tmp: 模版
+        resource: 资源
+        resource_id: 资源ID
+        status: 状态
     errors:
       sms_log: 
   helpers:

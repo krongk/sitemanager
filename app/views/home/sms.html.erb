@@ -36,8 +36,7 @@
 	  </div>
 	</div>
 
-    <!--短信内容列表 start-->
-    <div class='span4 box box-bordered box-nomargin'>
+    <div class='span4 box'>
         <div class='box-header'>
             <div class='title'>Green</div>
             <div class='actions'>
@@ -49,45 +48,26 @@
         </div>
         <div class='box-content'>
             <div class='accordion accordion-green' id='accordion2' style='margin-bottom:0;'>
+                <% current_user.sms_tmps.each_with_index do |item, index| %> 
                 <div class='accordion-group'>
                     <div class='accordion-heading'>
-                        <a class='accordion-toggle' data-parent='#accordion2' data-toggle='collapse' href='#collapseOne-accordion2'>
-                            Vero nam
+                        <a class='accordion-toggle' data-parent='#accordion2' data-toggle='collapse' href='#collapse<%=index%>-accordion2'>
+                          <%= item.title %>
                         </a>
                     </div>
-                    <div class='accordion-body collapse in' id='collapseOne-accordion2'>
+                    <div class='accordion-body collapse' id='collapse<%=index%>-accordion2'>
                         <div class='accordion-inner'>
-                            Molestiae incidunt porro ad occaecati maxime sint dolor non error qui nesciunt sunt qui quisquam reiciendis omnis ea iure dolores qui et.
+                           <%= item.content %>
+
+                           <%= link_to 'Edit', edit_sms_tmp_path(item) %>
+                           <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %>
                         </div>
                     </div>
                 </div>
-                <div class='accordion-group'>
-                    <div class='accordion-heading'>
-                        <a class='accordion-toggle' data-parent='#accordion2' data-toggle='collapse' href='#collapseTwo-accordion2'>
-                            Sit nemo ducimus laborum
-                        </a>
-                    </div>
-                    <div class='accordion-body collapse' id='collapseTwo-accordion2'>
-                        <div class='accordion-inner'>
-                            Molestiae incidunt porro ad occaecati maxime sint dolor non error qui nesciunt sunt qui quisquam reiciendis omnis ea iure dolores qui et.
-                        </div>
-                    </div>
-                </div>
-                <div class='accordion-group'>
-                    <div class='accordion-heading'>
-                        <a class='accordion-toggle' data-parent='#accordion2' data-toggle='collapse' href='#collapseThree-accordion2'>
-                            Dicta cumque perspiciatis.
-                        </a>
-                    </div>
-                    <div class='accordion-body collapse' id='collapseThree-accordion2'>
-                        <div class='accordion-inner'>
-                            Molestiae incidunt porro ad occaecati maxime sint dolor non error qui nesciunt sunt qui quisquam reiciendis omnis ea iure dolores qui et.
-                        </div>
-                    </div>
-                </div>
+                <% end %>
             </div>
         </div>
-    </div><!--短信内容列表 end-->
+    </div>
 
 
     <div class="span4 box box-bordered box-nomargin">
@@ -101,7 +81,7 @@
           </div>
       </div>
       <div class="box-content">
-          Dicta ea nihil voluptas ab repellat debitis et aperiam ut explicabo qui alias velit accusantium omnis tempora maiores ratione unde accusamus.
+        <%= render 'sms_tmps/form' %>
       </div>
     </div>
 

@@ -11,22 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130814065631) do
+ActiveRecord::Schema.define(:version => 20130815030601) do
 
   create_table "phone_items", :force => true do |t|
     t.integer  "user_id"
-    t.string   "mobile"
-    t.string   "source_name"
+    t.string   "mobile",       :limit => 16
+    t.string   "source_name",  :limit => 32
     t.string   "name"
-    t.string   "city"
+    t.string   "city",         :limit => 64
     t.string   "area"
     t.text     "description"
     t.text     "note"
-    t.string   "is_processed", :default => "n"
-    t.integer  "send_count",   :default => 0
+    t.string   "is_processed", :limit => 50, :default => "n"
+    t.integer  "send_count",                 :default => 0
     t.integer  "account_id"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
   end
 
   add_index "phone_items", ["city"], :name => "index_phone_items_on_city"
@@ -34,6 +34,14 @@ ActiveRecord::Schema.define(:version => 20130814065631) do
   add_index "phone_items", ["source_name"], :name => "index_phone_items_on_source_name"
   add_index "phone_items", ["user_id", "mobile"], :name => "index_phone_items_on_user_id_and_mobile"
   add_index "phone_items", ["user_id"], :name => "index_phone_items_on_user_id"
+
+  create_table "resource_items", :force => true do |t|
+    t.integer  "resource_type"
+    t.string   "resource_name"
+    t.string   "resource_path"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "roles", :force => true do |t|
     t.string   "name"

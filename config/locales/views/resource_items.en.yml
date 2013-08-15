@@ -1,16 +1,16 @@
-#encoding: utf-8
-zh-CN:
-  sms_tmps:
+---
+en:
+  resource_items:
     index:
-      title: Sms tmps
+      title: Resource items
     show:
-      title: Sms tmp
+      title: Resource item
     edit:
-      title: Editing Sms tmp
+      title: Editing Resource item
     new:
-      title: New Sms tmp
+      title: New Resource item
   flash:
-    sms_tmps:
+    resource_items:
       create:
         notice: ! '%{resource_name} was successfully created.'
       update:
@@ -18,11 +18,3 @@ zh-CN:
       destroy:
         notice: ! '%{resource_name} was successfully deleted.'
         alert: ! '%{resource_name} could not be deleted.'
-  simple_form:
-    labels:
-      sms_tmp:
-        title: '标题'
-        content: '内容'
-    hints:
-      sms_tmps:
-        title: '标题'

@@ -1,13 +1,13 @@
-<%= simple_form_for(@sms_tmp) do |f| %>
+<%= simple_form_for @sms_tmp, html: { class: 'form-horizontal' }  do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :user %>
-    <%= f.input :title %>
-    <%= f.input :content %>
+    <%= f.input :user_id, as: :hidden, input_html: {value: current_user.id} %>
+    <%= f.input :title, input_html: { class: 'input-block-level' } %>
+    <%= f.input :content, input_html: { class: 'char-counter input-block-level', rows: 4}  %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, class: 'btn btn-primary btn-large' %>
   </div>
 <% end %>

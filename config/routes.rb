@@ -1,13 +1,11 @@
 RailsComposerApp2::Application.routes.draw do
 
+  resources :resource_items
+
+
   resources :sms_logs
-
-
   resources :sms_tmps
-
-
   resources :phone_items
-
 
   get "page/about"
   get "page/contact"

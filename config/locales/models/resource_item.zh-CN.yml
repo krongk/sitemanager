@@ -1,0 +1,14 @@
+---
+zh-CN:
+  active_record:
+    models:
+      resource_item: Resource item
+    attributes:
+      resource_item:
+        resource_type: Resource type
+        resource_name: Resource name
+        resource_path: Resource path
+    errors:
+      resource_item: 
+  helpers:
+    resource_item: 
