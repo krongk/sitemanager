@@ -51,6 +51,11 @@ class ResourceItemsController < ApplicationController
       render :text => '错误的文件扩展名！<br/><a href="javascript: history.go(-1);">返回</a>'
       return
     end
+    unless ['xls', 'xlsx'].include? file_ext.last.downcase
+      render :text => '错误的文件扩展名！只接受.xls和.xlsx格式的。<br/><a href="javascript: history.go(-1);">返回</a>'
+      return
+    end
+
     file_name = "#{Time.now.to_i}.#{file_ext.last.downcase}"
     file_path = File.join("public", "resource")
     unless File.exist?(file_path)
@@ -61,16 +66,30 @@ class ResourceItemsController < ApplicationController
     FileUtils.cp tmp.path, file
     #FileUtils.rm tmp.path
 
-    s = Roo::Excel.new(file)
+    case file_ext.last.downcase
+    when 'xls'
+      s = Roo::Excel.new(file)
+    when 'xlsx'
+      s = Roo::Excelx.new(file)
+    end
     s.default_sheet = s.sheets.first  # first sheet in the spreadsheet file will be used
     #导入的字段为（手机号、来源、姓名、城市、地区、描述）
     index = 0
-    1.upto(10) do |row|
+    2.upto(1000) do |row|
       val = []
       1.upto(6) do |col|
         val << s.cell(row, col)
       end
-      PhoneItem.create!(:mobile => val[0], :source_name => val[1])
+      mobile = val[0].to_s.sub(/^(\d{11}).*/, '\1').strip
+      next if mobile.nil? || mobile !~ /^1\d{10}$/
+      p = PhoneItem.find_or_initialize_by_mobile(mobile)
+      p.user_id = current_user.id
+      p.source_name = val[1]
+      p.name = val[2]
+      p.city = val[3]
+      p.area = val[4]
+      p.description = val[-1]
+      p.save!
       index +=  1
     end
 

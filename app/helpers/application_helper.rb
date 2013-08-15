@@ -1,6 +1,18 @@
 #encoding: utf-8
 module ApplicationHelper
 
+  SMS_SEND_STATUS = {
+    0 => '发送成功', 
+    30 => '密码错误',
+    40 => '账户错误',
+    41 => '欠费',
+    42 => '账户过期',
+    43 => 'IP被封',
+    50 => '敏感内容',
+    51 => '号码错误',
+    100 => '未知错误'
+  }
+  
   def display_base_errors resource
     return '' if (resource.errors.empty?) or (resource.errors[:base].empty?)
     messages = resource.errors[:base].map { |msg| content_tag(:p, msg) }.join
@@ -13,7 +25,7 @@ module ApplicationHelper
     html.html_safe
   end
 
-  def get_rand_css
+  def rand_flag
     ['', 'success', 'warning', 'important', 'info', 'inverse'][rand(6)]
   end
   

@@ -32,6 +32,7 @@ gem "better_errors", ">= 0.7.2", :group => :development
 gem "binding_of_caller", ">= 0.7.1", :group => :development, :platforms => [:mri_19, :rbx]
 gem 'acts-as-taggable-on', '>=2.4.1'
 gem 'roo', '>=1.11.2' #Excel processing
+gem 'sms_bao', :git => 'git@github.com:krongk/sms_bao.git'
 
 #not for windows but for linux
 # gem "libv8", ">= 3.11.8"

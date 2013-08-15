@@ -1,3 +1,4 @@
+#encoding: utf-8
 class SmsTmpsController < ApplicationController
   # GET /sms_tmps
   # GET /sms_tmps.json
@@ -44,7 +45,7 @@ class SmsTmpsController < ApplicationController
 
     respond_to do |format|
       if @sms_tmp.save
-        format.html { redirect_to @sms_tmp, notice: 'Sms tmp was successfully created.' }
+        format.html { redirect_to "/home/sms", notice: '短信模版创建成功.' }
         format.json { render json: @sms_tmp, status: :created, location: @sms_tmp }
       else
         format.html { render action: "new" }
@@ -60,7 +61,7 @@ class SmsTmpsController < ApplicationController
 
     respond_to do |format|
       if @sms_tmp.update_attributes(params[:sms_tmp])
-        format.html { redirect_to @sms_tmp, notice: 'Sms tmp was successfully updated.' }
+        format.html { redirect_to "/home/sms", notice: '短信模版修改成功.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -76,7 +77,7 @@ class SmsTmpsController < ApplicationController
     @sms_tmp.destroy
 
     respond_to do |format|
-      format.html { redirect_to sms_tmps_url }
+      format.html { redirect_to "/home/sms", notice: '删除成功。' }
       format.json { head :no_content }
     end
   end

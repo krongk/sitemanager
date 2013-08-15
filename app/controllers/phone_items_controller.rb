@@ -1,4 +1,35 @@
+#encoding: utf-8
 class PhoneItemsController < ApplicationController
+  def phone_send
+    # render :text => params
+    # return
+    #{}"sms_tmp_id"=>"4", "DataTables_Table_0_length"=>"10", 
+    #{}"phone_item_ids"=>["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+    if params[:sms_tmp_id].nil?
+      flash[:error] = "没有选择短信模版"
+      redirect_to "/home/sms"
+      return
+    end
+    if params[:phone_item_ids].nil?
+      flash[:error] = "没有选择任何要发送的手机号"
+      redirect_to "/home/sms"
+      return
+    end
+
+    sms_tmp = SmsTmp.find(params[:sms_tmp_id])
+    phone_item_ids = params[:phone_item_ids] || []
+    PhoneItem.where(:id => phone_item_ids).each do |item|
+      status_id = SmsBao.send(ENV['SMS_BAO_USER'], ENV['SMS_BAO_PASSWORD'], item.mobile, sms_tmp.content)
+      item.is_processed = "[#{sms_tmp.id},#{status_id}]" + item.is_processed
+      item.send_count = item.send_count + 1
+      item.save!
+    end
+
+    respond_to do |format|
+      format.html {redirect_to "/home/sms", notice: '短信发送成功！'}
+    end
+  end
+
   # GET /phone_items
   # GET /phone_items.json
   def index
@@ -76,7 +107,7 @@ class PhoneItemsController < ApplicationController
     @phone_item.destroy
 
     respond_to do |format|
-      format.html { redirect_to phone_items_url }
+      format.html { redirect_to '/home/sms' }
       format.json { head :no_content }
     end
   end

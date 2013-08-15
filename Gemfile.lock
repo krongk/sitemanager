@@ -1,3 +1,9 @@
+GIT
+  remote: git@github.com:krongk/sms_bao.git
+  revision: 4f8292d79fa0939dbb745dcf9e96c4694351e2f4
+  specs:
+    sms_bao (0.1.1)
+
 GEM
   remote: http://ruby.taobao.org/
   specs:
@@ -256,6 +262,7 @@ GEM
     warden (1.2.3)
       rack (>= 1.0)
     webrobots (0.1.1)
+    win32console (1.3.2)
     win32console (1.3.2-x86-mingw32)
     xpath (2.0.0)
       nokogiri (~> 1.3)
@@ -293,4 +300,5 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   sidekiq (= 2.5.4)
   simple_form (>= 2.1.0)
+  sms_bao!
   uglifier (>= 1.0.3)

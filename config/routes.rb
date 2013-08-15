@@ -17,11 +17,7 @@ RailsComposerApp2::Application.routes.draw do
   get "page/documentation"
   get "page/help"
   
-  # resources :site_items do
-  #   collection do
-  #     get :tag
-  #   end
-  # end
+  post "/phone_send" => "phone_items#phone_send", :via => :post
 
   devise_for :users
   resources :users

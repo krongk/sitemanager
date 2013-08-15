@@ -10,6 +10,7 @@ class HomeController < ApplicationController
   def sms
   	@sms_tmp = SmsTmp.new
     @resource_item = ResourceItem.new
+    @phone_item = PhoneItem.new
   end
 
   def email

@@ -1,9 +1,37 @@
- <h2>短信发布管理</h2>
+<!-- page header container -->
+<div class="row-fluid">
+  <div class="span12">
+    <div class="page-header">
 
+      <!-- page title -->
+      <h1 class="pull-left">
+        <i class="icon-star"></i>
+        <span>短信营销管理</span>
+      </h1>
+
+      <!-- breadcrumbs -->
+      <div class="pull-right">
+        <ul class="breadcrumb">
+          <li>
+            <a href="home/index"><i class="icon-bar-chart"></i>
+            </a>
+          </li>
+          <li class="separator">
+            <i class="icon-angle-right"></i>
+          </li>
+          <li class="active">短信营销管理</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- content of page -->
 
 <div class="row-fluid">
 	<div class="span4 box box-bordered box-nomargin">
-	  <div class="box-header">
+	  <div class="box-header blue-background">
 	      <div class="title">
 	          <i class="icon-comments"></i>
 	          统计信息
@@ -37,8 +65,8 @@
 	</div>
 
     <div class='span4 box'>
-        <div class='box-header'>
-            <div class='title'>Green</div>
+        <div class='box-header blue-background'>
+            <div class='title'>手机号码批量导入</div>
             <div class='actions'>
                 <a href="#" class="btn box-remove btn-mini btn-link"><i class='icon-remove'></i>
                 </a>
@@ -47,25 +75,8 @@
             </div>
         </div>
         <div class='box-content'>
-            <div class='accordion accordion-green' id='accordion2' style='margin-bottom:0;'>
-                <% current_user.sms_tmps.each_with_index do |item, index| %> 
-                <div class='accordion-group'>
-                    <div class='accordion-heading'>
-                        <a class='accordion-toggle' data-parent='#accordion2' data-toggle='collapse' href='#collapse<%=index%>-accordion2'>
-                          <%= item.title %>
-                        </a>
-                    </div>
-                    <div class='accordion-body collapse' id='collapse<%=index%>-accordion2'>
-                        <div class='accordion-inner'>
-                           <%= item.content %>
-
-                           <%= link_to 'Edit', edit_sms_tmp_path(item) %>
-                           <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %>
-                        </div>
-                    </div>
-                </div>
-                <% end %>
-            </div>
+            <div class="alert alert-note">接受Excel(.xls和.xlsx)格式的手机号码表导入。请保证导入表的首行顺序为（手机号、来源、姓名、城市、地区、描述）</div>
+            <%= render 'resource_items/form' %>
         </div>
     </div>
 
@@ -84,21 +95,57 @@
         <%= render 'sms_tmps/form' %>
       </div>
     </div>
-
-    
-
-	
 </div>
 
 <hr class="hr-double">
 
-<%= render :partial => "components/fileupload" %>
+<%= form_tag "/phone_send", :method => :post do |f| %>
+
+<div class='row-fluid'>
+  <div class='span12 box'>
+    <div class='box-header'>
+        <div class='title'>1.选择短信模版</div>
+        <div class='actions'>
+            <a href="#" class="btn box-remove btn-mini btn-link"><i class='icon-remove'></i>
+            </a>
+            <a href="#" class="btn box-collapse btn-mini btn-link"><i></i>
+            </a>
+        </div>
+    </div>
+    <div class='box-content'>
+        <div class='accordion accordion-green' id='accordion2' style='margin-bottom:0;'>
+            <% current_user.sms_tmps.each_with_index do |item, index| %> 
+            <div class='accordion-group'>
+                <div class='accordion-heading'>
+
+                 <input id="phone_item_name_false" name="sms_tmp_id" type="radio" value="<%=item.id%>" style="float: left; margin: 0px;" checked ="true">
+
+                <a class='accordion-toggle' data-parent='#accordion2' data-toggle='collapse' href='#collapse<%=index%>-accordion2'>
+                      <span class="badge badge-<%=rand_flag%>"><%=item.id%></span>
+                      <%= item.title %>
+                    </a>
+                </div>
+                <div class='accordion-body collapse' id='collapse<%=index%>-accordion2'>
+                    <div class='accordion-inner'>
+                       <%= item.content %>
+                       <div class="text-right">
+                       <%= link_to '编辑', edit_sms_tmp_path(item), class: "btn btn-primary" %>
+                       <%= link_to '删除', item, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+                       </div>
+                    </div>
+                </div>
+            </div>
+            <% end %>
+        </div>
+    </div>
+  </div>
+</div>
 
 <!-- datatable -->
 <div class='row-fluid'>
 <div class='span12 box bordered-box orange-border' style='margin-bottom:0;'>
-<div class='box-header purple-background'>
-    <div class='title'>Data table with column filter in footer</div>
+<div class='box-header'>
+    <div class='title'>2.选择手机号</div>
     <div class='actions'>
         <a href="#" class="btn box-remove btn-mini btn-link"><i class='icon-remove'></i>
         </a>
@@ -114,366 +161,69 @@
 <thead>
 <tr>
     <th>
-        Name
+        <a onClick="javascript: ToggleCheck();" href="javascript:void(0);">全选</a>
     </th>
     <th>
-        E-mail
+        手机号
     </th>
     <th>
-        Status
+        来源
     </th>
-    <th><a onClick="javascript: ToggleCheck();" href="#">选择</a>
-    <a onClick="javascript: ToggleCheck();" href="#">发送短信</a>
+    <th>
+        城市
+    </th>
+    <th>
+        区域
+    </th>
+    <th>
+        姓名
+    </th>
+    <th>
+        描述
+    </th>
+    <th>
+        发送状态
+    </th>
+    <th>
+        发送次数
+    </th>
+    <th>
+        操作
     </th>
 </tr>
 </thead>
 <tbody>
+<% current_user.phone_items.each do |item| %>
 <tr>
-    <td>Lavern Oberbrunner</td>
-    <td>antonette@hotmail.com</td>
+    <td><%= check_box_tag 'phone_item_ids[]', item.id %></td>
+    <td><%= item.mobile %></td>
+    <td><%= item.source_name %></td>
+    <td><%= item.city %></td>
+    <td><%= item.area %></td>
+    <td><%= item.name %></td>
+    <td><%= item.description.to_s.truncate(40) %></td>
+    <td><%= item.is_processed %></td>
+    <td><%= item.send_count %></td>
     <td>
-        <span class='label label-important'>Important</span>
-    </td>
-    <td>
-        <div class='text-right'>
-            <a class='btn btn-success btn-mini' href='#'>
-                <i class='icon-ok'></i>
-            </a>
-            <a class='btn btn-danger btn-mini' href='#'>
-                <i class='icon-remove'></i>
-            </a>
-        </div>
+    <%= link_to edit_phone_item_path(item), class: 'btn btn-success btn-mini' do %>
+      <i class='icon-ok'></i>
+    <% end %>
+    <%= link_to item, method: :delete, data: { confirm: '是否删除?' }, class: 'btn btn-danger btn-mini' do %>
+        <i class='icon-remove'></i>
+    <% end %>
     </td>
 </tr>
-<tr>
-    <td>America Champlin</td>
-    <td>marques@hotmail.com</td>
-    <td>
-        <span class='label label-important'>Important</span>
-    </td>
-    <td>
-        <div class='text-right'>
-            <a class='btn btn-success btn-mini' href='#'>
-                <i class='icon-ok'></i>
-            </a>
-            <a class='btn btn-danger btn-mini' href='#'>
-                <i class='icon-remove'></i>
-            </a>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>Stone Herman</td>
-    <td>romaine@yahoo.com</td>
-    <td>
-        <span class='label label-warning'>Warning</span>
-    </td>
-    <td>
-        <div class='text-right'>
-            <a class='btn btn-success btn-mini' href='#'>
-                <i class='icon-ok'></i>
-            </a>
-            <a class='btn btn-danger btn-mini' href='#'>
-                <i class='icon-remove'></i>
-            </a>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>Arjun Ernser</td>
-    <td>estefania@hotmail.com</td>
-    <td>
-        <span class='label label-important'>Important</span>
-    </td>
-    <td>
-        <div class='text-right'>
-            <a class='btn btn-success btn-mini' href='#'>
-                <i class='icon-ok'></i>
-            </a>
-            <a class='btn btn-danger btn-mini' href='#'>
-                <i class='icon-remove'></i>
-            </a>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>Marina Zemlak</td>
-    <td>emmanuelle@hotmail.com</td>
-    <td>
-        <span class='label label-warning'>Warning</span>
-    </td>
-    <td>
-        <div class='text-right'>
-            <a class='btn btn-success btn-mini' href='#'>
-                <i class='icon-ok'></i>
-            </a>
-            <a class='btn btn-danger btn-mini' href='#'>
-                <i class='icon-remove'></i>
-            </a>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>Jarvis Cummings</td>
-    <td>amira@hotmail.com</td>
-    <td>
-        <span class='label label-success'>Success</span>
-    </td>
-    <td>
-        <div class='text-right'>
-            <a class='btn btn-success btn-mini' href='#'>
-                <i class='icon-ok'></i>
-            </a>
-            <a class='btn btn-danger btn-mini' href='#'>
-                <i class='icon-remove'></i>
-            </a>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>Kip Bruen</td>
-    <td>misty@gmail.com</td>
-    <td>
-        <span class='label label-success'>Success</span>
-    </td>
-    <td>
-        <div class='text-right'>
-            <a class='btn btn-success btn-mini' href='#'>
-                <i class='icon-ok'></i>
-            </a>
-            <a class='btn btn-danger btn-mini' href='#'>
-                <i class='icon-remove'></i>
-            </a>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>Mayra Kohler</td>
-    <td>lizzie@gmail.com</td>
-    <td>
-        <span class='label label-important'>Important</span>
-    </td>
-    <td>
-        <div class='text-right'>
-            <a class='btn btn-success btn-mini' href='#'>
-                <i class='icon-ok'></i>
-            </a>
-            <a class='btn btn-danger btn-mini' href='#'>
-                <i class='icon-remove'></i>
-            </a>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>Jamey Ward</td>
-    <td>marty@gmail.com</td>
-    <td>
-        <span class='label label-warning'>Warning</span>
-    </td>
-    <td>
-        <div class='text-right'>
-            <a class='btn btn-success btn-mini' href='#'>
-                <i class='icon-ok'></i>
-            </a>
-            <a class='btn btn-danger btn-mini' href='#'>
-                <i class='icon-remove'></i>
-            </a>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>Ken Beer</td>
-    <td>lenny@yahoo.com</td>
-    <td>
-        <span class='label label-important'>Important</span>
-    </td>
-    <td>
-        <div class='text-right'>
-            <a class='btn btn-success btn-mini' href='#'>
-                <i class='icon-ok'></i>
-            </a>
-            <a class='btn btn-danger btn-mini' href='#'>
-                <i class='icon-remove'></i>
-            </a>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>Celine Collier</td>
-    <td>kristina@yahoo.com</td>
-    <td>
-        <span class='label label-important'>Important</span>
-    </td>
-    <td>
-        <div class='text-right'>
-            <a class='btn btn-success btn-mini' href='#'>
-                <i class='icon-ok'></i>
-            </a>
-            <a class='btn btn-danger btn-mini' href='#'>
-                <i class='icon-remove'></i>
-            </a>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>Madaline Klocko</td>
-    <td>rahsaan@gmail.com</td>
-    <td>
-        <span class='label label-important'>Important</span>
-    </td>
-    <td>
-        <div class='text-right'>
-            <a class='btn btn-success btn-mini' href='#'>
-                <i class='icon-ok'></i>
-            </a>
-            <a class='btn btn-danger btn-mini' href='#'>
-                <i class='icon-remove'></i>
-            </a>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>Golda Paucek</td>
-    <td>dagmar@yahoo.com</td>
-    <td>
-        <span class='label label-success'>Success</span>
-    </td>
-    <td>
-        <div class='text-right'>
-            <a class='btn btn-success btn-mini' href='#'>
-                <i class='icon-ok'></i>
-            </a>
-            <a class='btn btn-danger btn-mini' href='#'>
-                <i class='icon-remove'></i>
-            </a>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>Jevon Wisoky</td>
-    <td>mara@gmail.com</td>
-    <td>
-        <span class='label label-important'>Important</span>
-    </td>
-    <td>
-        <div class='text-right'>
-            <a class='btn btn-success btn-mini' href='#'>
-                <i class='icon-ok'></i>
-            </a>
-            <a class='btn btn-danger btn-mini' href='#'>
-                <i class='icon-remove'></i>
-            </a>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>Yvonne King</td>
-    <td>pearlie@hotmail.com</td>
-    <td>
-        <span class='label label-warning'>Warning</span>
-    </td>
-    <td>
-        <div class='text-right'>
-            <a class='btn btn-success btn-mini' href='#'>
-                <i class='icon-ok'></i>
-            </a>
-            <a class='btn btn-danger btn-mini' href='#'>
-                <i class='icon-remove'></i>
-            </a>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>Uriel Brakus</td>
-    <td>kyleigh@gmail.com</td>
-    <td>
-        <span class='label label-important'>Important</span>
-    </td>
-    <td>
-        <div class='text-right'>
-            <a class='btn btn-success btn-mini' href='#'>
-                <i class='icon-ok'></i>
-            </a>
-            <a class='btn btn-danger btn-mini' href='#'>
-                <i class='icon-remove'></i>
-            </a>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>Bennie Bernhard</td>
-    <td>lexi@gmail.com</td>
-    <td>
-        <span class='label label-important'>Important</span>
-    </td>
-    <td>
-        <div class='text-right'>
-            <a class='btn btn-success btn-mini' href='#'>
-                <i class='icon-ok'></i>
-            </a>
-            <a class='btn btn-danger btn-mini' href='#'>
-                <i class='icon-remove'></i>
-            </a>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>Juanita Glover</td>
-    <td>jasen@yahoo.com</td>
-    <td>
-        <span class='label label-success'>Success</span>
-    </td>
-    <td>
-        <div class='text-right'>
-            <a class='btn btn-success btn-mini' href='#'>
-                <i class='icon-ok'></i>
-            </a>
-            <a class='btn btn-danger btn-mini' href='#'>
-                <i class='icon-remove'></i>
-            </a>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>Asha Reynolds</td>
-    <td>van@yahoo.com</td>
-    <td>
-        <span class='label label-important'>Important</span>
-    </td>
-    <td>
-        <div class='text-right'>
-            <a class='btn btn-success btn-mini' href='#'>
-                <i class='icon-ok'></i>
-            </a>
-            <a class='btn btn-danger btn-mini' href='#'>
-                <i class='icon-remove'></i>
-            </a>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>Donnell Bode</td>
-    <td>jakob@hotmail.com</td>
-    <td>
-        <span class='label label-warning'>Warning</span>
-    </td>
-    <td>
-        <div class='text-right'>
-            <a class='btn btn-success btn-mini' href='#'>
-                <i class='icon-ok'></i>
-            </a>
-            <a class='btn btn-danger btn-mini' href='#'>
-                <i class='icon-remove'></i>
-            </a>
-        </div>
-    </td>
-</tr>
+<% end %>
 </tbody>
 <tfoot>
 <tr>
-    <th>Name</th>
-    <th>E-mail</th>
-    <th colspan='2'>Status</th>
+    <th></th>
+    <th>手机号</th>
+    <th>来源</th>
+    <th>城市</th>
+    <th>区域</th>
+    <th>姓名</th>
+    <th colspan='5'></th>
 </tr>
 </tfoot>
 </table>
@@ -481,4 +231,30 @@
 </div>
 </div>
 </div>
-</div>
+</div><!-- end datatable -->
+
+  <div class="form-actions">
+    <%= submit_tag "发送短息", class: 'btn btn-primary btn-large' %>
+  </div>
+<% end %>
+
+
+<script type="text/javascript">
+    function ToggleCheck()
+    {
+      var names=document.getElementsByName("phone_item_ids[]");
+      var len=names.length;
+      if(len>0)
+      {
+       var i=0;
+       for(i=0;i<len;i++){
+         if(names[i].checked == true){
+                names[i].checked=false;
+         }else{
+                names[i].checked=true;
+         }
+       }
+       
+      }
+    }
+</script>
