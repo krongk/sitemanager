@@ -1,4 +1,5 @@
 class SmsLogsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /sms_logs
   # GET /sms_logs.json
   def index

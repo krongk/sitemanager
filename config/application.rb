@@ -87,3 +87,5 @@ module RailsComposerApp2
     config.assets.version = '1.1'
   end
 end
+
+require "#{Rails.root}/lib/monkey"

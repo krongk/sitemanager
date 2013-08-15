@@ -1,10 +1,8 @@
 #encoding: utf-8
 class PhoneItemsController < ApplicationController
+  before_filter :authenticate_user!
+
   def phone_send
-    # render :text => params
-    # return
-    #{}"sms_tmp_id"=>"4", "DataTables_Table_0_length"=>"10", 
-    #{}"phone_item_ids"=>["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
     if params[:sms_tmp_id].nil?
       flash[:error] = "没有选择短信模版"
       redirect_to "/home/sms"
@@ -18,11 +16,13 @@ class PhoneItemsController < ApplicationController
 
     sms_tmp = SmsTmp.find(params[:sms_tmp_id])
     phone_item_ids = params[:phone_item_ids] || []
+
     PhoneItem.where(:id => phone_item_ids).each do |item|
       status_id = SmsBao.send(ENV['SMS_BAO_USER'], ENV['SMS_BAO_PASSWORD'], item.mobile, sms_tmp.content)
-      item.is_processed = "[#{sms_tmp.id},#{status_id}]" + item.is_processed
+      item.is_processed = item.is_processed == 'n' ? "#{sms_tmp.id},#{status_id}" : "#{sms_tmp.id},#{status_id}|" + item.is_processed
       item.send_count = item.send_count + 1
       item.save!
+      Keystore.increment_value_for("user:#{item.user_id}:phone_items_send")
     end
 
     respond_to do |format|
@@ -33,7 +33,7 @@ class PhoneItemsController < ApplicationController
   # GET /phone_items
   # GET /phone_items.json
   def index
-    @phone_items = PhoneItem.all
+    @phone_items = send_count.phone_items.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -75,7 +75,7 @@ class PhoneItemsController < ApplicationController
 
     respond_to do |format|
       if @phone_item.save
-        format.html { redirect_to @phone_item, notice: 'Phone item was successfully created.' }
+        format.html { redirect_to '/home/sms', notice: '手机号码添加成功.' }
         format.json { render json: @phone_item, status: :created, location: @phone_item }
       else
         format.html { render action: "new" }
@@ -91,7 +91,7 @@ class PhoneItemsController < ApplicationController
 
     respond_to do |format|
       if @phone_item.update_attributes(params[:phone_item])
-        format.html { redirect_to @phone_item, notice: 'Phone item was successfully updated.' }
+        format.html { redirect_to '/home/sms', notice: '手机号码修改成功.'  }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

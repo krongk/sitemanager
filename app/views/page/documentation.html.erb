@@ -397,7 +397,7 @@ content
 rails g scaffold sms_log user:references sms_tmp:references resource:string resource_id:integer status:integer
 
 user_id
-resource 资源名称(phone_item, account, or ...)
+resource 资源名称( account, or ...) phone_item 作为群发对象，不写进日志。
 resource_id 
 sms_tmp_id
 status (发送状态：失败、成功； 来自常量)

@@ -1,6 +1,8 @@
 #encoding: utf-8
 require 'roo'
 class ResourceItemsController < ApplicationController
+  before_filter :authenticate_user!
+  
   # GET /resource_items
   # GET /resource_items.json
   def index

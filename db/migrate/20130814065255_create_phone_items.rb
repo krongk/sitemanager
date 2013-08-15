@@ -16,8 +16,7 @@ class CreatePhoneItems < ActiveRecord::Migration
       t.timestamps
     end
     add_index :phone_items, :user_id
-    add_index :phone_items, :mobile, :unique => true
-    add_index :phone_items, [:user_id, :mobile]
+    add_index :phone_items, [:user_id, :mobile], :unique => true
     add_index :phone_items, :city
     add_index :phone_items, :source_name
   end

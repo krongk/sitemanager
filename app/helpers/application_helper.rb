@@ -2,7 +2,7 @@
 module ApplicationHelper
 
   SMS_SEND_STATUS = {
-    0 => '发送成功', 
+    0 => '成功', 
     30 => '密码错误',
     40 => '账户错误',
     41 => '欠费',
@@ -12,7 +12,8 @@ module ApplicationHelper
     51 => '号码错误',
     100 => '未知错误'
   }
-  
+  BADGE_FLAG = {'success' => '成功', 'warning' => '警告', 'important' => '严重', 'info' => '提示', 'inverse' => '失败'}
+
   def display_base_errors resource
     return '' if (resource.errors.empty?) or (resource.errors[:base].empty?)
     messages = resource.errors[:base].map { |msg| content_tag(:p, msg) }.join
@@ -26,9 +27,29 @@ module ApplicationHelper
   end
 
   def rand_flag
-    ['', 'success', 'warning', 'important', 'info', 'inverse'][rand(6)]
+    BADGE_FLAG.keys[rand(5)]
   end
-  
+
+  #[3,0][1,30] => [sms_tmp_id, send_status]
+  def show_sms_send_status(is_processed)
+    if is_processed == 'n'
+      return "<span class='badge badge-info' title='未发送'>未发送</span>".html_safe
+    end
+
+    arr = []
+    is_processed.split("|").each do |s|
+      sms_tmp_id, send_status = s.split(',')
+      flag = case send_status.to_i
+      when 0 then 'success'
+      when 30..42 then 'warning'
+      when 43..51 then 'important'
+      else 'inverse'
+      end
+      arr << "<span class='badge badge-#{flag}' title='#{BADGE_FLAG[flag]}'>#{sms_tmp_id}</span>"
+    end
+    arr.join.html_safe
+  end
+
   #flash动画显示
   # eg: play_flash("flash/top_banner.swf")
   # or: play_flash asset_path("flash/top_banner.swf"), :width => '985', :height => '249'

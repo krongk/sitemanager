@@ -13,7 +13,7 @@
       <div class="pull-right">
         <ul class="breadcrumb">
           <li>
-            <a href="home/index"><i class="icon-bar-chart"></i>
+            <a href="/home/index"><i class="icon-bar-chart"></i>
             </a>
           </li>
           <li class="separator">
@@ -28,73 +28,96 @@
 </div>
 
 <!-- content of page -->
-
 <div class="row-fluid">
-	<div class="span4 box box-bordered box-nomargin">
-	  <div class="box-header blue-background">
-	      <div class="title">
-	          <i class="icon-comments"></i>
-	          统计信息
-	      </div>
-	      <div class="actions">
-	          <a href="#" class="btn box-remove btn-mini btn-link"><i class="icon-remove"></i>
-	          </a>
-	          <a href="#" class="btn box-collapse btn-mini btn-link"><i></i>
-	          </a>
-	      </div>
-	  </div>
-	  <div class="row-fluid">
-	      <div class="span12">
-	          <div class="box-content box-statistic">
-	              <h3 class="title text-error">91</h3>
-	              <small>号码总数</small>
-	              <div class="text-error icon-plus align-right"></div>
-	          </div>
-	          <div class="box-content box-statistic">
-	              <h3 class="title text-success">1</h3>
-	              <small>发送成功</small>
-	              <div class="text-success icon-ok align-right"></div>
-	          </div>
-	          <div class="box-content box-statistic">
-	              <h3 class="title text-info">123</h3>
-	              <small>发送失败</small>
-	              <div class="text-info icon-time align-right"></div>
-	          </div>
-	      </div>
-	  </div>
-	</div>
-
-    <div class='span4 box'>
-        <div class='box-header blue-background'>
-            <div class='title'>手机号码批量导入</div>
-            <div class='actions'>
-                <a href="#" class="btn box-remove btn-mini btn-link"><i class='icon-remove'></i>
-                </a>
-                <a href="#" class="btn box-collapse btn-mini btn-link"><i></i>
-                </a>
-            </div>
+  <div class="span12 box box-bordered box-nomargin">
+    <div class="box-header red-background">
+        <div class="title">
+            <i class="icon-comments"></i>
+            统计信息
         </div>
-        <div class='box-content'>
-            <div class="alert alert-note">接受Excel(.xls和.xlsx)格式的手机号码表导入。请保证导入表的首行顺序为（手机号、来源、姓名、城市、地区、描述）</div>
-            <%= render 'resource_items/form' %>
+        <div class="actions">
+            <a href="#" class="btn box-remove btn-mini btn-link"><i class="icon-remove"></i>
+            </a>
+            <a href="#" class="btn box-collapse btn-mini btn-link"><i></i>
+            </a>
         </div>
     </div>
+    <div class="row-fluid">
+        <div class="span4">
+            <div class="box-content box-statistic">
+                <h3 class="title text-error"><%= Keystore.value_for("user:#{current_user.id}:phone_items_count") || 0%></h3>
+                <small>号码总数</small>
+                <div class="text-error icon-plus align-right"></div>
+            </div>
+        </div>
+        <div class="span4">
+            <div class="box-content box-statistic">
+                <h3 class="title text-success"><%= Keystore.value_for("user:#{current_user.id}:phone_items_send") || 0%></h3>
+                <small>成功发送</small>
+                <div class="text-success icon-ok align-right"></div>
+            </div>
+        </div>
+        <div class="span4">
+            <div class="box-content box-statistic">
+                <h3 class="title text-info"><%= current_user.phone_items.where(:is_processed => 'n').size%></h3>
+                <small>等待发送</small>
+                <div class="text-info icon-time align-right"></div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+  
+<hr class="hr">
 
-
-    <div class="span4 box box-bordered box-nomargin">
-      <div class="box-header blue-background">
-          <div class="title">编辑短信模板</div>
-          <div class="actions">
-              <a href="#" class="btn box-remove btn-mini btn-link"><i class="icon-remove"></i>
+<div class="row-fluid">
+  <div class='span4 box'>
+      <div class='box-header blue-background'>
+          <div class='title'>手机号码批量导入</div>
+          <div class='actions'>
+              <a href="#" class="btn box-remove btn-mini btn-link"><i class='icon-remove'></i>
               </a>
               <a href="#" class="btn box-collapse btn-mini btn-link"><i></i>
               </a>
           </div>
       </div>
-      <div class="box-content">
-        <%= render 'sms_tmps/form' %>
+      <div class='box-content'>
+          <div class="alert alert-note">接受Excel(.xls和.xlsx)格式的手机号码表导入。请保证导入表的列顺序为（手机号、来源、姓名、城市、地区、描述）</div>
+          <%= render 'resource_items/form' %>
       </div>
+  </div>
+
+
+  <div class="span4 box box-bordered box-nomargin">
+    <div class="box-header blue-background">
+        <div class="title">编辑短信模板</div>
+        <div class="actions">
+            <a href="#" class="btn box-remove btn-mini btn-link"><i class="icon-remove"></i>
+            </a>
+            <a href="#" class="btn box-collapse btn-mini btn-link"><i></i>
+            </a>
+        </div>
     </div>
+    <div class="box-content">
+      <%= render 'sms_tmps/form' %>
+    </div>
+  </div>
+
+  <div class="span4 box box-bordered box-nomargin">
+    <div class="box-header blue-background">
+        <div class="title">新增手机号码</div>
+        <div class="actions">
+            <a href="#" class="btn box-remove btn-mini btn-link"><i class="icon-remove"></i>
+            </a>
+            <a href="#" class="btn box-collapse btn-mini btn-link"><i></i>
+            </a>
+        </div>
+    </div>
+    <div class="box-content">
+      <%= render 'phone_items/form' %>
+    </div>
+  </div>
+
 </div>
 
 <hr class="hr-double">
@@ -202,7 +225,7 @@
     <td><%= item.area %></td>
     <td><%= item.name %></td>
     <td><%= item.description.to_s.truncate(40) %></td>
-    <td><%= item.is_processed %></td>
+    <td><%= show_sms_send_status(item.is_processed) %></td>
     <td><%= item.send_count %></td>
     <td>
     <%= link_to edit_phone_item_path(item), class: 'btn btn-success btn-mini' do %>

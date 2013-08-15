@@ -11,22 +11,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130815030601) do
+ActiveRecord::Schema.define(:version => 20130815141340) do
+
+  create_table "keystores", :id => false, :force => true do |t|
+    t.string   "key",        :limit => 50, :default => "", :null => false
+    t.integer  "value"
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
+
+  add_index "keystores", ["key"], :name => "key", :unique => true
 
   create_table "phone_items", :force => true do |t|
     t.integer  "user_id"
-    t.string   "mobile",       :limit => 16
-    t.string   "source_name",  :limit => 32
+    t.string   "mobile"
+    t.string   "source_name"
     t.string   "name"
-    t.string   "city",         :limit => 64
+    t.string   "city"
     t.string   "area"
     t.text     "description"
     t.text     "note"
-    t.string   "is_processed", :limit => 50, :default => "n"
-    t.integer  "send_count",                 :default => 0
+    t.string   "is_processed", :default => "n"
+    t.integer  "send_count",   :default => 0
     t.integer  "account_id"
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   add_index "phone_items", ["city"], :name => "index_phone_items_on_city"

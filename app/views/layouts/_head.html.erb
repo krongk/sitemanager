@@ -6,8 +6,8 @@
     <!-- this enables responsive features in browser -->
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
-    <title><%= content_for?(:title) ? yield(:title) : "雨服务" %></title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "雨服务" %>">
+    <title><%= content_for?(:title) ? yield(:title) : Rails.application.name %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : Rails.application.name %>">
 
     <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "application" %>
