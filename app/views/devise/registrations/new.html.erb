@@ -9,10 +9,13 @@
 <div class='controls'>
     <div class='caret'></div>
     <div class='form-wrapper'>
+        <div class='text-center'>
+            <%= render 'layouts/messages' %>
+        </div>
         <h1 class='text-center'>用户注册</h1>
         <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-vertical' }) do |f| %>
         		<%= f.error_notification %>
-  					<%= display_base_errors resource %>
+  				<%= display_base_errors resource %>
             <div class='row-fluid'>
                 <div class='span12 icon-over-input'>
                     <input autofocus="autofocus" class="span12" id="user_name" name="user[name]" placeholder="用户名称" type="text">
@@ -45,14 +48,11 @@
             </label>
             <button class="btn btn-block" name="button" type="submit">提 交</button>
         <% end %>
-        <div class='text-center'>
-            <hr class='hr-normal'>
-            <%= render "devise/shared/links" %>
-        </div>
+        
     </div>
 </div>
 <div class='login-action text-center'>
-    
+  <%= render "devise/shared/links" %>
 </div>
 </div>
 

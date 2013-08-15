@@ -33,19 +33,19 @@ gem "binding_of_caller", ">= 0.7.1", :group => :development, :platforms => [:mri
 
 gem 'acts-as-taggable-on'
 #not for windows but for linux
-# gem "libv8", ">= 3.11.8"
-# gem "therubyracer", ">= 0.11.3", :group => :assets, :platform => :ruby, :require => "v8"
+ gem "libv8", ">= 3.11.8"
+ gem "therubyracer", ">= 0.11.3", :group => :assets, :platform => :ruby, :require => "v8"
 
 #==I18n
 	# Central point to collect locale data for use in Ruby on Rails.
 	# Add below to config to include only I18n which you want:
 	# 	config.i18n.available_locales = ['es-CO', :de]
-	gem 'rails-i18n', '~> 0.1.8'
+gem 'rails-i18n', '~> 0.1.8'
 	# Creates yaml locale files for models and views when using the model / scaffold_controller generators.
-	gem 'i18n_yaml_generator', '~> 0.0.1'
+gem 'i18n_yaml_generator', '~> 0.0.1'
 
 #===Chinese Misic
-	gem 'chinese_pinyin'
+gem 'chinese_pinyin'
 
 #===Pagination
 	#debug: ActiveAdmin undefined local variable or method `per', so must down will_paginate '3.0.2' to '3.0.pre2'
@@ -60,8 +60,8 @@ gem 'acts-as-taggable-on'
 #gem 'sitemap_generator'
 
 #==Forager
-	gem 'mechanize', '2.0.1'
-	gem 'hpricot', '0.8.6'
+gem 'mechanize', '2.0.1'
+gem 'hpricot', '0.8.6'
 
 #for background job
 gem 'sidekiq', '2.5.4'

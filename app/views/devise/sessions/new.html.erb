@@ -9,6 +9,9 @@
 <div class='controls'>
   <div class='caret'></div>
   <div class='form-wrapper'>
+      <div class='text-center'>
+          <%= render 'layouts/messages' %>
+      </div>
       <h1 class='text-center'>登 录</h1>
       <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 					<%= f.error_notification %>
@@ -32,13 +35,10 @@
           </label>
           <button class="btn btn-block" name="button" type="submit">提 交</button>
       <% end %>
-      <div class='text-center'>
-          <hr class='hr-normal'>
-          <%= render "devise/shared/links" %>
-      </div>
+      
   </div>
 </div>
 <div class='login-action text-center'>
-  
+  <%= render "devise/shared/links" %>
 </div>
 </div>
