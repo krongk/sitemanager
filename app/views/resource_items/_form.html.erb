@@ -1,9 +1,9 @@
 <%= simple_form_for(@resource_item, :html => {:multipart => true}) do |f| %>
   <%= f.error_notification %>
+  <%= hidden_field_tag('resource_item[resource_type]', resource_type) %>
 
   <div class="form-inputs">
   	<%= f.file_field :upload_file %>
-    <%#= f.input :resource_type %>
     <%#= f.input :resource_name %>
     <%#= f.input :resource_path %>
   </div>

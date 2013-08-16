@@ -44,6 +44,11 @@ class ResourceItemsController < ApplicationController
   # POST /resource_items
   # POST /resource_items.json
   def create
+    unless ['email', 'phone'].include? params[:resource_item][:resource_type]
+      render :text => '资源没有分类，请确认！<br/><a href="javascript: history.go(-1);">返回</a>'
+      return
+    end
+
     tmp = params[:resource_item][:upload_file].tempfile
     unless (file_ext = params[:resource_item][:upload_file].original_filename.split('.')).size > 1
       render :text => '错误的文件扩展名！<br/><a href="javascript: history.go(-1);">返回</a>'
@@ -68,17 +73,31 @@ class ResourceItemsController < ApplicationController
     when 'xlsx'
       s = Roo::Excelx.new(file)
     end
-    s.default_sheet = s.sheets.first  # first sheet in the spreadsheet file will be used
+    s.default_sheet = s.sheets.first 
+
+    
     #导入的字段为（手机号、姓名、来源、城市、地区、描述）
     index = 0
-    1.upto(2000) do |row|
+    1.upto(20000) do |row|
       val = []
       1.upto(6) do |col|
-        val << s.cell(row, col)
+        val << s.cell(row, col).to_s.strip
       end
-      mobile = val[0].to_s.sub(/^(\d{11}).*/, '\1').strip
-      next if mobile.nil? || mobile !~ /^(1(([35][0-9])|(47)|[8][01236789]))\d{8}$/
-      p = PhoneItem.find_or_initialize_by_mobile(mobile)
+      #the last line?
+      break if val.join.blank?
+
+      if params[:resource_item][:resource_type] == 'email'
+        email_or_phone = val[0].to_s.strip
+        p = MailItem.find_or_initialize_by_email(email_or_phone)
+      elsif params[:resource_item][:resource_type] == 'phone'
+        email_or_phone = val[0].to_s.sub(/^(\d{11}).*/, '\1').strip
+        p = PhoneItem.find_or_initialize_by_mobile(email_or_phone)
+      end
+
+      next if email_or_phone.nil? || 
+       (email_or_phone !~ /^[\w-]+@([\w-]+\.)+[\w]+$/ &&
+       email_or_phone !~ /^(1(([35][0-9])|(47)|[8][01236789]))\d{8}$/)
+
       p.user_id = current_user.id
       p.name = val[1]
       p.source_name = val[2]
@@ -91,7 +110,8 @@ class ResourceItemsController < ApplicationController
 
     respond_to do |format|
       if true
-        format.html { redirect_to "/home/sms", notice: "总共导入数据#{index}条." }
+        url = params[:resource_item][:resource_type] == 'email' ? '/home/email' : '/home/sms'
+        format.html { redirect_to url, notice: "总共导入数据#{index}条." }
       else
         format.html { render action: "new" }
       end
@@ -139,4 +159,59 @@ class ResourceItemsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+  def import_email(s)
+    # first sheet in the spreadsheet file will be used
+    #导入的字段为（手机号、姓名、来源、城市、地区、描述）
+    index = 0
+    1.upto(20000) do |row|
+      val = []
+      1.upto(6) do |col|
+        val << s.cell(row, col).to_s.strip
+      end
+      #the last line?
+      break if val.join.blank?
+
+      email = val[0].to_s.strip
+      next if email.nil? || email !~ /^[\w-]+@([\w-]+\.)+[\w]+$/
+      p = MailItem.find_or_initialize_by_email(email)
+      p.user_id = current_user.id
+      p.name = val[1]
+      p.source_name = val[2]
+      p.city = val[3]
+      p.area = val[4]
+      p.description = val[-1]
+      p.save!
+      index +=  1
+    end
+  end
+
+  def import_phone(s)
+    # first sheet in the spreadsheet file will be used
+    #导入的字段为（手机号、姓名、来源、城市、地区、描述）
+    index = 0
+    1.upto(20000) do |row|
+      val = []
+      1.upto(6) do |col|
+        val << s.cell(row, col)
+      end
+      #the last line?
+      break if val.join.blank?
+
+      mobile = val[0].to_s.sub(/^(\d{11}).*/, '\1').strip
+      next if mobile.nil? || mobile !~ /^(1(([35][0-9])|(47)|[8][01236789]))\d{8}$/
+      p = PhoneItem.find_or_initialize_by_mobile(mobile)
+      p.user_id = current_user.id
+      p.name = val[1]
+      p.source_name = val[2]
+      p.city = val[3]
+      p.area = val[4]
+      p.description = val[-1]
+      p.save!
+      index +=  1
+    end
+  end
+
 end

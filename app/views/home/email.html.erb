@@ -83,7 +83,7 @@
       </div>
       <div class='box-content'>
           <div class="alert alert-note">接受Excel(.xls和.xlsx)格式的邮件表导入。<br>请保证表列顺序为（邮箱、姓名、来源、城市、地区、描述）<br>一次最多导入2000条记录。</div>
-          <%= render 'resource_items/form' %>
+          <%= render 'resource_items/form', :resource_type => 'email' %>
       </div>
   </div>
 
@@ -256,7 +256,7 @@
 </div><!-- end datatable -->
 
   <div class="form-actions">
-    <%= submit_tag "发送短息", class: 'btn btn-primary btn-large' %>
+    <%= submit_tag "发送邮件", class: 'btn btn-primary btn-large' %>
   </div>
 <% end %>
 
