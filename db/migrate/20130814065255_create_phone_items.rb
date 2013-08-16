@@ -1,8 +1,8 @@
 class CreatePhoneItems < ActiveRecord::Migration
   def change
     create_table :phone_items do |t|
-      t.references :user
-      t.string :mobile
+      t.references :user, :null => false
+      t.string :mobile, :limit => 32, :null => false
       t.string :source_name
       t.string :name
       t.string :city
@@ -11,7 +11,7 @@ class CreatePhoneItems < ActiveRecord::Migration
       t.text :note
       t.string :is_processed, :default => 'n'
       t.integer :send_count, :default => 0
-      t.integer :account_id
+      t.integer :customer_id
 
       t.timestamps
     end

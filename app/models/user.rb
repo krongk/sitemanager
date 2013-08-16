@@ -11,9 +11,11 @@ class User < ActiveRecord::Base
   attr_accessible :role_ids, :as => :admin
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
   
-  has_many :sms_tmps
-  has_many :sms_logs
-  has_many :phone_items
+  has_many :sms_tmps, :dependent => :destroy
+  has_many :sms_logs, :dependent => :destroy
+  has_many :phone_items, :dependent => :destroy
+  has_many :mail_items, :dependent => :destroy
+  has_many :mail_tmps, :dependent => :destroy
 
   before_create :set_default_roles
 

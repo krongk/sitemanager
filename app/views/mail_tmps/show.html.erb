@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @mail_tmp.user %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @mail_tmp.title %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @mail_tmp.content %>
+</p>
+
+
+<%= link_to 'Edit', edit_mail_tmp_path(@mail_tmp) %> |
+<%= link_to 'Back', mail_tmps_path %>

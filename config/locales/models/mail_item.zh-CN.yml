@@ -1,0 +1,22 @@
+#encoding: utf-8
+zh-CN:
+  activerecord:
+    models:
+      mail_item: 邮件列表
+    attributes:
+      mail_item:
+        user: 用户
+        email: 电子邮箱
+        name: 姓名
+        source_name: 来源
+        city: 城市
+        area: 地区
+        description: 描述
+        note: 备注
+        is_processed: 执行
+        send_count: 发送
+        account_id: 联系人ID
+    errors:
+      mail_item: 
+  helpers:
+    mail_item: 

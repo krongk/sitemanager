@@ -31,7 +31,7 @@ module ApplicationHelper
   end
 
   #[3,0][1,30] => [sms_tmp_id, send_status]
-  def show_sms_send_status(is_processed)
+  def show_send_status(is_processed)
     if is_processed == 'n'
       return "<span class='badge badge-info' title='未发送'>未发送</span>".html_safe
     end

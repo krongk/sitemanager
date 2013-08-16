@@ -1,0 +1,16 @@
+<%= simple_form_for(@mail_tmp) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%#= f.association :user %>
+    <%= f.input :user_id, as: :hidden, input_html: {value: current_user.id} %>
+    <%= f.input :title %>
+    <%#= f.input :content %>
+    <textarea class="span12 wysihtml5" cols="40" id="mail_tmp_content" name="mail_tmp[content]" placeholder="Some text here..." rows="10">
+                &lt;h1&gt;你好，欢迎光临!&lt;/h1&gt;</textarea>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-primary btn-large' %>
+  </div>
+<% end %>

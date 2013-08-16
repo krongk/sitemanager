@@ -14,6 +14,9 @@ class HomeController < ApplicationController
   end
 
   def email
+    @mail_tmp = MailTmp.new
+    @resource_item = ResourceItem.new
+    @mail_item = MailItem.new
   end
   
 

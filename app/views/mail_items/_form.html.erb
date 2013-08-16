@@ -1,0 +1,22 @@
+<%= simple_form_for(@mail_item) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%#= f.association :user %>
+    <%= f.input :user_id, as: :hidden, input_html: {value: current_user.id} %>
+    <%= f.input :email %>
+    <%= f.input :name %>
+    <%#= f.input :source_name %>
+    <%#= f.input :city %>
+    <%#= f.input :area %>
+    <%#= f.input :description %>
+    <%#= f.input :note %>
+    <%#= f.input :is_processed %>
+    <%#= f.input :send_count %>
+    <%#= f.input :account_id %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-primary btn-large'%>
+  </div>
+<% end %>

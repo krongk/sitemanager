@@ -1,5 +1,11 @@
 RailsComposerApp2::Application.routes.draw do
 
+  resources :mail_tmps
+
+
+  resources :mail_items
+
+
   resources :resource_items
 
 

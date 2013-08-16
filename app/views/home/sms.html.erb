@@ -82,7 +82,7 @@
           </div>
       </div>
       <div class='box-content'>
-          <div class="alert alert-note">接受Excel(.xls和.xlsx)格式的手机号码表导入。请保证导入表的列顺序为（手机号、来源、姓名、城市、地区、描述）</div>
+          <div class="alert alert-note">接受Excel(.xls和.xlsx)格式的手机号码表导入。<br>请保证表列顺序为（手机号、姓名、来源、城市、地区、描述）<br>一次最多导入2000条记录。</div>
           <%= render 'resource_items/form' %>
       </div>
   </div>
@@ -190,6 +190,9 @@
         手机号
     </th>
     <th>
+        姓名
+    </th>
+    <th>
         来源
     </th>
     <th>
@@ -197,9 +200,6 @@
     </th>
     <th>
         区域
-    </th>
-    <th>
-        姓名
     </th>
     <th>
         描述
@@ -220,12 +220,12 @@
 <tr>
     <td><%= check_box_tag 'phone_item_ids[]', item.id %></td>
     <td><%= item.mobile %></td>
+    <td><%= item.name %></td>
     <td><%= item.source_name %></td>
     <td><%= item.city %></td>
     <td><%= item.area %></td>
-    <td><%= item.name %></td>
     <td><%= item.description.to_s.truncate(40) %></td>
-    <td><%= show_sms_send_status(item.is_processed) %></td>
+    <td><%= show_send_status(item.is_processed) %></td>
     <td><%= item.send_count %></td>
     <td>
     <%= link_to edit_phone_item_path(item), class: 'btn btn-success btn-mini' do %>

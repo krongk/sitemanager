@@ -18,7 +18,8 @@ class PhoneItemsController < ApplicationController
     phone_item_ids = params[:phone_item_ids] || []
 
     PhoneItem.where(:id => phone_item_ids).each do |item|
-      status_id = SmsBao.send(ENV['SMS_BAO_USER'], ENV['SMS_BAO_PASSWORD'], item.mobile, sms_tmp.content)
+      content = sms_tmp.content.sub(/(\[name\])/, "#{item.name} ")
+      status_id = SmsBao.send(ENV['SMS_BAO_USER'], ENV['SMS_BAO_PASSWORD'], item.mobile, content)
       item.is_processed = item.is_processed == 'n' ? "#{sms_tmp.id},#{status_id}" : "#{sms_tmp.id},#{status_id}|" + item.is_processed
       item.send_count = item.send_count + 1
       item.save!
@@ -72,7 +73,7 @@ class PhoneItemsController < ApplicationController
   # POST /phone_items.json
   def create
     @phone_item = PhoneItem.new(params[:phone_item])
-
+    @phone_item.source_name = '人工添加' if @phone_item.source_name.nil?
     respond_to do |format|
       if @phone_item.save
         format.html { redirect_to '/home/sms', notice: '手机号码添加成功.' }

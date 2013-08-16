@@ -1,13 +1,13 @@
----
+#encoding: utf-8
 zh-CN:
-  active_record:
+  activerecord:
     models:
-      resource_item: Resource item
+      resource_item: 资源
     attributes:
       resource_item:
-        resource_type: Resource type
-        resource_name: Resource name
-        resource_path: Resource path
+        resource_type: 类型
+        resource_name: 名称
+        resource_path: 路径
     errors:
       resource_item: 
   helpers:

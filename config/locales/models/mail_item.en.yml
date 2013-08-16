@@ -1,0 +1,22 @@
+---
+en:
+  active_record:
+    models:
+      mail_item: Mail item
+    attributes:
+      mail_item:
+        user: User
+        email: Email
+        name: Name
+        source_name: Source name
+        city: City
+        area: Area
+        description: Description
+        note: Note
+        is_processed: Is processed
+        send_count: Send count
+        customer_id: Customer
+    errors:
+      mail_item: 
+  helpers:
+    mail_item: 

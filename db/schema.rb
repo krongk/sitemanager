@@ -11,37 +11,67 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130815141340) do
+ActiveRecord::Schema.define(:version => 20130816023846) do
 
   create_table "keystores", :id => false, :force => true do |t|
     t.string   "key",        :limit => 50, :default => "", :null => false
-    t.integer  "value"
+    t.integer  "value",      :limit => 8
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
   end
 
   add_index "keystores", ["key"], :name => "key", :unique => true
 
-  create_table "phone_items", :force => true do |t|
+  create_table "mail_items", :force => true do |t|
     t.integer  "user_id"
-    t.string   "mobile"
-    t.string   "source_name"
+    t.string   "email"
     t.string   "name"
+    t.string   "source_name"
     t.string   "city"
     t.string   "area"
     t.text     "description"
     t.text     "note"
     t.string   "is_processed", :default => "n"
     t.integer  "send_count",   :default => 0
-    t.integer  "account_id"
+    t.integer  "customer_id"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "mail_items", ["city"], :name => "index_mail_items_on_city"
+  add_index "mail_items", ["source_name"], :name => "index_mail_items_on_source_name"
+  add_index "mail_items", ["user_id", "email"], :name => "index_mail_items_on_user_id_and_email", :unique => true
+  add_index "mail_items", ["user_id"], :name => "index_mail_items_on_user_id"
+
+  create_table "mail_tmps", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "mail_tmps", ["user_id"], :name => "index_mail_tmps_on_user_id"
+
+  create_table "phone_items", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "mobile"
+    t.string   "name"
+    t.string   "source_name"
+    t.string   "city"
+    t.string   "area"
+    t.text     "description"
+    t.text     "note"
+    t.string   "is_processed", :default => "n"
+    t.integer  "send_count",   :default => 0
+    t.integer  "customer_id"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
   end
 
   add_index "phone_items", ["city"], :name => "index_phone_items_on_city"
-  add_index "phone_items", ["mobile"], :name => "index_phone_items_on_mobile", :unique => true
   add_index "phone_items", ["source_name"], :name => "index_phone_items_on_source_name"
-  add_index "phone_items", ["user_id", "mobile"], :name => "index_phone_items_on_user_id_and_mobile"
+  add_index "phone_items", ["user_id", "mobile"], :name => "index_phone_items_on_user_id_and_mobile", :unique => true
   add_index "phone_items", ["user_id"], :name => "index_phone_items_on_user_id"
 
   create_table "resource_items", :force => true do |t|

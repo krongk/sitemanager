@@ -44,10 +44,6 @@ class ResourceItemsController < ApplicationController
   # POST /resource_items
   # POST /resource_items.json
   def create
-    #upload file resource_item[upload_file]
-    #render :text => RooExcel.extract('sdf')
-    #return
-
     tmp = params[:resource_item][:upload_file].tempfile
     unless (file_ext = params[:resource_item][:upload_file].original_filename.split('.')).size > 1
       render :text => '错误的文件扩展名！<br/><a href="javascript: history.go(-1);">返回</a>'
@@ -63,10 +59,8 @@ class ResourceItemsController < ApplicationController
     unless File.exist?(file_path)
       FileUtils.mkdir_p file_path
     end
-    #public/resource/picture/2/1304543534.jpg
     file = File.join(file_path, file_name)
     FileUtils.cp tmp.path, file
-    #FileUtils.rm tmp.path
 
     case file_ext.last.downcase
     when 'xls'
@@ -75,19 +69,19 @@ class ResourceItemsController < ApplicationController
       s = Roo::Excelx.new(file)
     end
     s.default_sheet = s.sheets.first  # first sheet in the spreadsheet file will be used
-    #导入的字段为（手机号、来源、姓名、城市、地区、描述）
+    #导入的字段为（手机号、姓名、来源、城市、地区、描述）
     index = 0
-    2.upto(1000) do |row|
+    1.upto(2000) do |row|
       val = []
       1.upto(6) do |col|
         val << s.cell(row, col)
       end
       mobile = val[0].to_s.sub(/^(\d{11}).*/, '\1').strip
-      next if mobile.nil? || mobile !~ /^1\d{10}$/
+      next if mobile.nil? || mobile !~ /^(1(([35][0-9])|(47)|[8][01236789]))\d{8}$/
       p = PhoneItem.find_or_initialize_by_mobile(mobile)
       p.user_id = current_user.id
-      p.source_name = val[1]
-      p.name = val[2]
+      p.name = val[1]
+      p.source_name = val[2]
       p.city = val[3]
       p.area = val[4]
       p.description = val[-1]
