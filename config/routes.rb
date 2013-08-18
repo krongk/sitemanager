@@ -24,7 +24,8 @@ RailsComposerApp2::Application.routes.draw do
   get "page/help"
   
   post "/phone_send" => "phone_items#phone_send", :via => :post
-
+  post "/mail_send" => "mail_items#mail_send", :via => :post
+  
   devise_for :users
   resources :users
 

@@ -1,5 +1,3 @@
-<div class='container'>
-<div class='row'>
 
 <div class='span3 flatty-sidebar'>
     <ul class='nav nav-list nav-stacked' data-offset-top='0' data-spy='affix'>
@@ -58,6 +56,17 @@
 
 <div class='span9'>
 <section id='body-structure'>
+<pre>
+我们的使命，以使你的工作更简单，更愉快，更富有成效的生活。我们期待着看到我们如何可以帮助您。
+
+竞争网站：
+https://slack.com/
+Flickr 的创始人 Butterfield 新做了一个企业沟通协作类产品，目前还出于内测阶段，上线第一天就已经有 8000 多家公司注册，初势凶猛。
+
+Slack 可能跟 Yammer 有些类似，目标是将分散的沟通方式聚集到一个地方，邮件、IM、短信、类似 Yammer 的工具、企业内网和 Wiki 等，都能在 Slack 这找到。Butterfield 称一些参与内测的公司发现一段时间后，内部沟通不那么依赖邮件了。
+
+除了整合沟通方式外，Slack 还整合了文件分享系统，公司内所有共享文件，包括上传到 Slack 上的，还有储存在 Google Doc 或者 Dropbox 里的，通过内置的搜索工具，都能进行全文检索。Slack 还整合了 Twitter、Zendesk、Crashlytics 和 Heroku 等服务，将他们的通知提醒、Bug 追踪等数据融入到公司内的信息流中。目的只有一个，做一个能解决公司内所有问题的工具。
+</pre>
     <div class='page-header'>
         <h1>Body structure</h1>
     </div>
@@ -148,9 +157,15 @@ status (发送状态：失败、成功； 来自常量)
         <h1>邮件营销</h1>
     </div>
     <pre class='prettyprint linenums'>
+    biz_mailer.rb
+    layouts/email.html.erb
+    发送邮件的Gmail设置在【账号资源】管理中。
+
 邮件批量导入
 邮件模版创建
 邮件群发
+
+http://railsapps.github.io/rails-send-email.html
     </pre>
     <h3>数据表</h3>
     <pre class='prettyprint linenums'>
@@ -211,6 +226,3 @@ status (发送状态：失败、成功； 来自常量)
     &lt;/header&gt;</pre>
 </section>
 </div><!-- class='span9' end -->
-
-</div><!-- class='row' end -->
-</div><!-- class='container' end -->

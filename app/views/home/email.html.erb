@@ -183,7 +183,7 @@
 <thead>
 <tr>
     <th>
-        <a onClick="javascript: ToggleCheck();" href="javascript:void(0);">全选</a>
+        选
     </th>
     <th>
         邮箱
@@ -207,7 +207,7 @@
         发送状态
     </th>
     <th>
-        发送次数
+        次数
     </th>
     <th>
         操作
@@ -256,6 +256,7 @@
 </div><!-- end datatable -->
 
   <div class="form-actions">
+    <a onClick="javascript: ToggleCheck();" href="javascript:void(0);">全选</a> &nbsp;|&nbsp;
     <%= submit_tag "发送邮件", class: 'btn btn-primary btn-large' %>
   </div>
 <% end %>

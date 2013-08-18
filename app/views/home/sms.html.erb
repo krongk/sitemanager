@@ -184,7 +184,7 @@
 <thead>
 <tr>
     <th>
-        <a onClick="javascript: ToggleCheck();" href="javascript:void(0);">全选</a>
+        选择
     </th>
     <th>
         手机号
@@ -220,11 +220,11 @@
 <tr>
     <td><%= check_box_tag 'phone_item_ids[]', item.id %></td>
     <td><%= item.mobile %></td>
-    <td><%= item.name %></td>
-    <td><%= item.source_name %></td>
-    <td><%= item.city %></td>
-    <td><%= item.area %></td>
-    <td><%= item.description.to_s.truncate(40) %></td>
+    <td><%= item.name.to_s.truncate(10) %></td>
+    <td><%= item.source_name.to_s.truncate(12) %></td>
+    <td><%= item.city.to_s.truncate(20) %></td>
+    <td><span title="<%= item.area %>"><%= item.area.to_s.truncate(8) %></span></td>
+    <td><span title="<%= item.description %>"><%= item.description.to_s.truncate(20) %></span></td>
     <td><%= show_send_status(item.is_processed) %></td>
     <td><%= item.send_count %></td>
     <td>
@@ -257,6 +257,7 @@
 </div><!-- end datatable -->
 
   <div class="form-actions">
+     <a onClick="javascript: ToggleCheck();" href="javascript:void(0);">全选</a> &nbsp;|&nbsp;
     <%= submit_tag "发送短信", class: 'btn btn-primary btn-large' %>
   </div>
 <% end %>
