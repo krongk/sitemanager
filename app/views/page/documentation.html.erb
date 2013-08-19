@@ -6,6 +6,11 @@
                 文档综述
             </a>
         </li>
+         <li>
+            <a href='#site'>
+                站内通
+            </a>
+        </li>
         <li>
             <a href='#sms'>
                 短信营销
@@ -17,8 +22,8 @@
             </a>
         </li>
         <li>
-            <a href='#components'>
-                Components
+            <a href='#qzone'>
+                QQ邮件发送到Qzone日志
             </a>
         </li>
         <li>
@@ -93,6 +98,23 @@ contacter 和 customer同属于表account, 分类不一样而已，方便管理�
     </pre>
    
 </section>
+<br>
+<br>
+<section id='site'>
+    <div class='page-header'>
+        <h1>站内通</h1>
+        提供企业自助建站，简历企业自己的形象网站，打通营销和宣传的出口和入口。
+        网站内容包括：企业介绍（简介、地址、联系方式），主题页，博客发布（博客分发到各平台），微博发布（多说分享到各微博平台），微信传播
+    </div>
+    <h3>参考</h3>
+    <pre class='prettyprint linenums'>
+    腾讯企业空间：http://4000850900.114.qq.com/
+    电脑经销商：http://dealer.zol.com.cn/d_99016/
+    ３１５８：http://www.3158.cn/corpname/taotaox/?site=mjgg-gjzs
+    58网邻通； http://jcyjg.58.com.cn/
+    </pre>
+</section>
+
 <br>
 <br>
 <section id='sms'>
@@ -213,16 +235,41 @@ status (发送状态：失败、成功； 来自常量)
 </section>
 <br>
 <br>
-<section id='ui'>
+<section id='qzone'>
     <div class='page-header'>
-        <h1>Body structure</h1>
+        <h1>QQ邮箱发送日志到Qzone</h1>
     </div>
-    <h3>Header structure</h3>
-    <pre class='prettyprint linenums'>&lt;header&gt;
-      &lt;div class='navbar'&gt;
-   
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/header&gt;</pre>
+    <h3>如此这般就可以实现在站内网发布的博客一键邮件到QQ空间了</h3>
+    <pre class='prettyprint linenums'>
+1. 登录QQ邮箱，在‘设置’里面开启smtp服务，否则报错：QQ 454 Authentication failed, please open smtp flag first
+2. from 与 user_name必须一致，否则报错。
+3. QQ客服：http://kf.qq.com/faq/120322fu63YV130422nqIrqu.html
+4. QQ是77632132， 则Qzone的地址为：77632132@qzone.qq.com
+
+实例代码：
+
+class BizMailer < ActionMailer::Base
+  layout 'email'
+  default from: "77632132@qq.com"
+
+  #Overwrite config.action_mailer.smtp_settings
+  self.smtp_settings = {
+    address: "smtp.qq.com",
+    port: 25,
+    domain: "65960.com",
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: '77632132',
+    password: 'i3epasword'
+  }
+
+  def marketing_mail(content)
+    @greeting = "Hi"
+    @content = content
+    mail to: "77632132@qzone.qq.com"
+  end
+end
+
+    </pre>
 </section>
 </div><!-- class='span9' end -->

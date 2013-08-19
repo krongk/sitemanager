@@ -1,16 +1,16 @@
 class BizMailer < ActionMailer::Base
   layout 'email'
-  default from: "from@65960.com"
+  default from: "77632132@qq.com"
 
   #Overwrite config.action_mailer.smtp_settings
   self.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: 587,
+    address: "smtp.qq.com",
+    port: 25,
     domain: "65960.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: ENV["GMAIL_USERNAME_TWO"],
-    password: ENV["GMAIL_PASSWORD_TWO"]
+    user_name: '77632132',
+    password: 'i3e5kenrome!'
   }
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -21,6 +21,6 @@ class BizMailer < ActionMailer::Base
     @greeting = "Hi"
     @content = content
     puts "***************************************send"
-    mail to: "master@inruby.com"
+    mail to: "77632132@qzone.qq.com"
   end
 end
