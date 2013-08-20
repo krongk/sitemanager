@@ -1,13 +1,14 @@
 RailsComposerApp2::Application.routes.draw do
 
+  resources :sites
+  resources :site_steps
+
+  resources :user_details
+
   resources :mail_tmps
-
-
   resources :mail_items
 
-
   resources :resource_items
-
 
   resources :sms_logs
   resources :sms_tmps

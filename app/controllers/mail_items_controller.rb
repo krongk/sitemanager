@@ -1,5 +1,7 @@
 #encoding: utf-8
 class MailItemsController < ApplicationController
+  before_filter :authenticate_user!
+  
   #POST
   def mail_send
     if params[:mail_tmp_id].nil?

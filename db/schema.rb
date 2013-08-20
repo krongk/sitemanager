@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130816023846) do
+ActiveRecord::Schema.define(:version => 20130820125507) do
 
   create_table "keystores", :id => false, :force => true do |t|
     t.string   "key",        :limit => 50, :default => "", :null => false
@@ -23,17 +23,17 @@ ActiveRecord::Schema.define(:version => 20130816023846) do
   add_index "keystores", ["key"], :name => "key", :unique => true
 
   create_table "mail_items", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "email"
+    t.integer  "user_id",                       :null => false
+    t.string   "email",                         :null => false
     t.string   "name"
     t.string   "source_name"
     t.string   "city"
     t.string   "area"
     t.text     "description"
     t.text     "note"
-    t.string   "is_processed", :default => "n"
+    t.string   "is_processed", :default => "n", :null => false
     t.integer  "send_count",   :default => 0
-    t.integer  "customer_id"
+    t.integer  "account_id"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
   end
@@ -75,11 +75,11 @@ ActiveRecord::Schema.define(:version => 20130816023846) do
   add_index "phone_items", ["user_id"], :name => "index_phone_items_on_user_id"
 
   create_table "resource_items", :force => true do |t|
-    t.integer  "resource_type"
+    t.string   "resource_type", :limit => 32
     t.string   "resource_name"
     t.string   "resource_path"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   create_table "roles", :force => true do |t|
@@ -92,6 +92,23 @@ ActiveRecord::Schema.define(:version => 20130816023846) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "sites", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "site_name",    :limit => 32,                    :null => false
+    t.string   "domain"
+    t.integer  "theme_id"
+    t.text     "head"
+    t.text     "header"
+    t.text     "body"
+    t.text     "footer"
+    t.boolean  "is_published",               :default => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
+  end
+
+  add_index "sites", ["site_name"], :name => "index_sites_on_site_name", :unique => true
+  add_index "sites", ["user_id"], :name => "index_sites_on_user_id"
 
   create_table "sms_logs", :force => true do |t|
     t.integer  "user_id"
@@ -134,6 +151,41 @@ ActiveRecord::Schema.define(:version => 20130816023846) do
   create_table "tags", :force => true do |t|
     t.string "name"
   end
+
+  create_table "user_details", :force => true do |t|
+    t.integer  "user_id",                           :null => false
+    t.string   "contact_name",        :limit => 32
+    t.string   "id_card"
+    t.string   "mobile_phone",        :limit => 16
+    t.string   "tel_phone"
+    t.string   "qq",                  :limit => 16
+    t.string   "email",               :limit => 32
+    t.string   "website"
+    t.string   "region"
+    t.string   "city"
+    t.string   "district"
+    t.string   "address"
+    t.string   "latitude"
+    t.string   "longitude"
+    t.string   "company_name"
+    t.string   "company_nickname"
+    t.string   "corporator"
+    t.string   "company_reg_no"
+    t.string   "company_reg_code"
+    t.text     "company_description"
+    t.string   "company_keywords"
+    t.string   "fu_gmail_name",       :limit => 32
+    t.string   "fu_gmail_pwd",        :limit => 32
+    t.string   "fu_qmail_name",       :limit => 32
+    t.string   "fu_qmail_pwd",        :limit => 32
+    t.string   "fu_user_name",        :limit => 32
+    t.string   "fu_user_pwd",         :limit => 32
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_details", ["mobile_phone"], :name => "index_user_details_on_mobile_phone"
+  add_index "user_details", ["user_id"], :name => "index_user_details_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

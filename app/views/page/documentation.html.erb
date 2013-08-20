@@ -6,7 +6,12 @@
                 文档综述
             </a>
         </li>
-         <li>
+        <li>
+            <a href='#variable'>
+                通用信息管理
+            </a>
+        </li>
+        <li>
             <a href='#site'>
                 站内通
             </a>
@@ -98,20 +103,93 @@ contacter 和 customer同属于表account, 分类不一样而已，方便管理�
     </pre>
    
 </section>
+
+<br>
+<br>
+<section id='variable'>
+    <div class='page-header'>
+        <h1>通用信息表</h1>
+        联系人信息、公司信息、地址信息、网站、QQ（联系QQ以及功能QQ），Email(联系邮箱及功能邮箱)
+        企业简介，公司别名，身份证，营业证，手机号
+    </div>
+    <h3>参考</h3>
+    <pre class='prettyprint linenums'>
+rails g scaffold user_detail user:references contact_name:string id_card:string mobile_phone:string tel_phone:string qq:string email:string website:string region:string city:string district:string address:string latitude:string longitude:string company_name:string company_nickname:string corporator:string company_reg_no:string company_reg_code:string company_description:string company_keywords:string fu_gmail_name:string fu_gmail_pwd:string fu_qmail_name:string fu_qmail_pwd:string fu_user_name:string fu_user_pwd:string 
+
+- 企业信息
+    公司名称
+    别名 company_nickname
+    法人 corporator
+    注册资金 Capital
+    企业简介
+    企业关键词
+    营业证号 reg_number
+    组织机构代码 reg_code
+- 图片信息（paperclip)
+    公司logo(type: logo)
+    公司形象图(type: CIS)
+
+- 联系人信息
+    联系人姓名
+    身份证号
+    手机
+    电话
+    QQ
+    网址
+    邮箱
+    省 region
+    市 city
+    区域 district
+    地址
+    经度 longitude
+    纬度 latitude
+
+- 功能信息(fu_)
+    群发Gmail
+    gmail密码
+    群发Qmail
+    qmail密码
+    通用登录名1
+    通用登录密1
+  
+    </pre>
+</section>
+
 <br>
 <br>
 <section id='site'>
     <div class='page-header'>
         <h1>站内通</h1>
         提供企业自助建站，简历企业自己的形象网站，打通营销和宣传的出口和入口。
-        网站内容包括：企业介绍（简介、地址、联系方式），主题页，博客发布（博客分发到各平台），微博发布（多说分享到各微博平台），微信传播
+        网站内容包括：企业介绍（简介、地址、联系方式），主题页，博客发布（博客分发到各平台），微博发布（多说分享到各微博平台），微信传播, 提供留言表单。
     </div>
     <h3>参考</h3>
     <pre class='prettyprint linenums'>
     腾讯企业空间：http://4000850900.114.qq.com/
     电脑经销商：http://dealer.zol.com.cn/d_99016/
     ３１５８：http://www.3158.cn/corpname/taotaox/?site=mjgg-gjzs
-    58网邻通； http://jcyjg.58.com.cn/
+    58网邻通: http://jcyjg.58.com.cn/
+    zohosites: http://inruby.zohosites.com/home.html
+    </pre>
+    <pre class='prettyprint linenums'>
+    rails g scaffold site user:references site_name:string domain:string theme_id:integer head:text header:text body:text footer:text
+    site_name 网站唯一别名， 如 s-cdwebsite => sites#show/id=cdwebsite
+    domain: 绑定域名
+    theme_id: 模版
+    head: html的<head>可定制部分
+    header: 页头导航部分
+    body: 内页可定制部分， 内嵌【博客、多说评论、公司简介、联系方式、地图（如果有经纬度)、留言）
+    footer: 页脚部分，可嵌入统计代码、友情链接等。
+    ...
+
+    网站的创建采用了gem: wicked 实现分布Wizard表单。参考：
+    https://github.com/schneems/wicked
+    http://railscasts.com/episodes/346-wizard-forms-with-wicked
+    用到的控制器： site_steps
+    步骤:
+    theme - 选择模版
+    content - 添加公共内容
+    publish - 发布（生成静态网页目录）
     </pre>
 </section>
 

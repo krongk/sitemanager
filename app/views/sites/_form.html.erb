@@ -1,0 +1,61 @@
+<div class='fuelux'>
+    <div class='wizard'>
+        <ul class='steps'>
+            <li class='active' data-target='#step1'>
+                <span class='step'>1</span>
+            </li>
+            <li data-target='#step2'>
+                <span class='step'>2</span>
+            </li>
+            <li data-target='#step3'>
+                <span class='step'>3</span>
+            </li>
+            <li data-target='#step4'>
+                <span class='step'>4</span>
+            </li>
+        </ul>
+    </div>
+    <div class='step-content'>
+        <hr class='hr-normal'>
+
+          <div class='step-pane active' id='step1'>
+            <%= simple_form_for(@site) do |f| %>
+              <%= f.error_notification %>
+              <% if @site.errors.any? %>
+                <div class="alert alert-error error_messages">
+                  <ul>
+                  <% @site.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                  </ul>
+                </div>
+              <% end %>
+              <fieldset>
+                <% if @site.new_record? %>
+                  <%= f.input :site_name, :required => true, :input_html => {:class => "span12 icon-over-input"}, wrapper_html: { class: 'row-fluid' }  %>
+                  <label>网站名作为访问网站的唯一标示，一旦创建则不能修改. 网站名由3-30位字母和数字的组合，如: http://www.65960.com/s-<span style="color:red;background:#ddd;">mysite</span></label>
+                <% else %>
+                  <%= f.input :site_name, :disabled => true, :required => true, hint: "网站名不能修改",  :input_html => {:class => "span12 icon-over-input"}, wrapper_html: { class: 'row-fluid' } %>
+                <% end %>
+              </fieldset>
+
+              <div class='form-actions' style='margin-bottom: 0;'>
+                <div class='text-right'>
+                  <%= button_tag(type: 'submit', class: "btn btn-primary btn-large") do %>
+                    <i class='icon-arrow-right'></i> 下一步
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          <div class='step-pane' id='step2'>
+             <div class="alert alert-info">请首先完成第一步</div>
+          </div>
+          <div class='step-pane' id='step3'>
+             <div class="alert alert-info">请首先完成第二步</div>
+          </div>
+          <div class='step-pane' id='step4'>
+             <div class="alert alert-info">请首先完成第三步</div>
+          </div>
+    </div>
+</div>

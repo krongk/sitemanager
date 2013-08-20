@@ -1,5 +1,6 @@
 #encoding: utf-8
 class MailTmpsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /mail_tmps
   # GET /mail_tmps.json
   def index

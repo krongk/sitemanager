@@ -1,18 +1,43 @@
+<div id='wrapper'>
+<div class='application'>
+    <div class='application-content'>
+        <a href="/page/about"><div class='icon-heart'></div>
+            <span><%= Rails.application.name %></span>
+        </a>
+    </div>
+</div>
+<div class='controls'>
+    <div class='caret'></div>
+    <div class='form-wrapper'>
+        <div class='text-center'>
+            <%= render 'layouts/messages' %>
+        </div>
+        <h1 class='text-center'>修改用户名/密码</h1>
 <% #fit for render on /setting
  resource ||= current_user
  resource_name ||= :user
 %>
-<h3>修改密码及名称</h3>
-<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-vertical' }) do |f| %>
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
   <%= f.error_notification %>
   <%= display_base_errors resource %>
-  <%= f.input :email, :disabled => true, :required => true %>
-  <%= f.input :name, :autofocus => true %>
-  <%= f.input :password, :autocomplete => "off", :hint => "如果不想改变当前的密码，则留空", :required => false %>
-  <%= f.input :password_confirmation, :required => false %>
-  <%= f.input :current_password, :hint => "请输入你当前使用的密码", :required => true %>
-  <%= f.button :submit, :class => 'btn-primary' %>
+  <fieldset>
+	  <%= f.input :email, :disabled => true, :required => true, :input_html => {:class => "span12 icon-over-input"}, wrapper_html: { class: 'row-fluid' } %>
+	  <%= f.input :name, :autofocus => true, :input_html => {:class => "span12 icon-over-input"}, wrapper_html: { class: 'row-fluid' } %>
+	  <%= f.input :password, :autocomplete => "off", :placeholder => "如果不想改变当前的密码，则留空", :required => false, :input_html => {:class => "span12 icon-over-input"}, wrapper_html: { class: 'row-fluid' } %>
+	  <%= f.input :password_confirmation, :required => false, :input_html => {:class => "span12 icon-over-input"}, wrapper_html: { class: 'row-fluid' } %>
+	  <%= f.input :current_password, :placeholder => "请输入你当前使用的密码", :required => true, :input_html => {:class => "span12 icon-over-input"}, wrapper_html: { class: 'row-fluid' } %>
+  </fieldset>
+  <div class='form-actions' style='margin-bottom: 0;'>
+      <div class='text-right'>
+          <%= button_tag(type: 'submit', class: "btn btn-primary btn-large") do %>
+            <i class='icon-save'></i> 保存
+          <% end %>
+      </div>
+  </div>
 <% end %>
-
-<hr/>
-<p>不喜欢使用此账户了? &nbsp;&nbsp; <%= link_to "注销账户", registration_path(resource_name), :data => { :confirm => "确认?" }, :method => :delete %>&nbsp;&nbsp;<i>(*此操作不可撤销。请慎重考虑！)</i></p>
+    </div>
+</div>
+<div class='login-action text-center'>
+  <%= link_to "返回", "/" %>
+</div>
+</div>

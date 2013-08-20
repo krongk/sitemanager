@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @site.user %>
+</p>
+
+<p>
+  <b>Site name:</b>
+  <%= @site.site_name %>
+</p>
+
+<p>
+  <b>Domain:</b>
+  <%= @site.domain %>
+</p>
+
+<p>
+  <b>Theme:</b>
+  <%= @site.theme_id %>
+</p>
+
+<p>
+  <b>Head:</b>
+  <%= @site.head %>
+</p>
+
+<p>
+  <b>Header:</b>
+  <%= @site.header %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @site.body %>
+</p>
+
+<p>
+  <b>Footer:</b>
+  <%= @site.footer %>
+</p>
+
+
+<%= link_to 'Edit', edit_site_path(@site) %> |
+<%= link_to 'Back', sites_path %>

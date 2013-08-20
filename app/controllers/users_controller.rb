@@ -13,6 +13,10 @@ class UsersController < ApplicationController
     #@tags = @user.site_items.tag_counts_on(:tags)
   end
   
+  def edit
+ 
+  end
+  
   def update
     authorize! :update, @user, :message => '没有权限访问.'
     @user = User.find(params[:id])
