@@ -43,9 +43,9 @@ gem 'wicked' #for site create wizard
 	# Central point to collect locale data for use in Ruby on Rails.
 	# Add below to config to include only I18n which you want:
 	# 	config.i18n.available_locales = ['es-CO', :de]
-#gem 'rails-i18n', '~> 0.1.8'
+gem 'rails-i18n', '~> 0.1.8'
 	# Creates yaml locale files for models and views when using the model / scaffold_controller generators.
-#gem 'i18n_yaml_generator', '~> 0.0.1'
+gem 'i18n_yaml_generator', '~> 0.0.1'
 
 #===Chinese Misic
 gem 'chinese_pinyin'
@@ -71,3 +71,6 @@ gem 'sidekiq', '2.5.4'
 
 #bootstrap font awesome
 #gem 'font-awesome-sass-rails'
+
+#web server
+gem 'thin', '1.5.1' #start thin: bundle exec thin start

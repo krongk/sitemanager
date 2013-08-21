@@ -191,6 +191,17 @@ rails g scaffold user_detail user:references contact_name:string id_card:string 
     content - 添加公共内容
     publish - 发布（生成静态网页目录）
     </pre>
+
+    <h2>关于模板</h2>
+    <pre>
+    创建了controller: theme，其中show方法用于现实模板效果，参数说明：
+    :id => site.theme_id
+    :s  => site.site_name
+
+    模板css链接采用Bootstrap CDN：http://netdna.bootstrapcdn.com/
+    模板样式采用Bootswatch: http://netdna.bootstrapcdn.com/
+        通过选择模板，将Bootswatch的css链接传过来。
+    </pre>
 </section>
 
 <br>
