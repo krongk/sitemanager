@@ -57,11 +57,41 @@
 											            <div class="alert alert-info">网站名称一旦创建成功就不能修改</div>
 											          </div>
 											          <div class='step-pane active' id='step2'>
-											             <%= render layout: 'form' do |f| %>
-																	  <fieldset>
-																	    <%= f.input :theme_id %>
-																	  </fieldset>
-																	 <% end %>
+<%= render layout: 'form' do |f| %>
+<div class='row-fluid'>
+<div class='span12'>
+<div class='gallery'>
+<ul class='unstyled inline'>
+<% Theme.all.each do |theme| %>
+<li>
+    <div class='picture' style="border: 2px solid #ccc;">
+        <div class='tags'>
+            <% theme.tags.split(/[ ,]+/).each do |tag| %>
+                <div class='label label-'<%= rand_flag %> ><%=tag %></div>
+            <% end %>
+        </div>
+        <div class='actions' style="background: #000; color: #fff;">
+            <div class='pull-left'>
+                <i class='icon-user'></i>
+                <%= theme.name %>
+                &nbsp;&nbsp;
+                <i class='icon-share'></i>
+                <%= theme.share_count %>
+            </div>
+            <div class='pull-right'> 
+                选择<input id="site_theme_id_<%=theme.id%>" name="site[theme_id]" type="radio" value="<%= theme.id %>">
+            </div>
+        </div>
+        <%= image_tag  asset_path("theme/#{theme.name}.png"), :width => '400px' %>
+<!--         <img alt="250x150" src="http://placehold.it/250x150" />
+ -->    </div>
+</li>
+<% end %>
+</ul>
+</div>
+</div></div>
+											 
+<% end %>
 											          </div>
 											          <div class='step-pane' id='step3'>
 											              <div class="alert alert-info">请首先完成第二步</div>

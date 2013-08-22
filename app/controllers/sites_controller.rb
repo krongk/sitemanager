@@ -1,5 +1,8 @@
 #encoding: utf-8
 class SitesController < ApplicationController
+  include ApplicationHelper
+  layout 'theme', :only => [:show]
+
   before_filter :authenticate_user!, :except => [:index, :show]
 
   # GET /sites
@@ -16,7 +19,8 @@ class SitesController < ApplicationController
   # GET /sites/1
   # GET /sites/1.json
   def show
-    @site = current_user.sites.find(params[:id])
+    @site = params[:id] =~ /^\d+$/ ? current_user.sites.find_by_id(params[:id]) : current_user.sites.find_by_site_name(params[:id])
+    return check_nil(@site)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -82,7 +86,7 @@ class SitesController < ApplicationController
     @site.destroy
 
     respond_to do |format|
-      format.html { redirect_to sites_url }
+      format.html { redirect_to sites_url, notice: '网站删除成功。' }
       format.json { head :no_content }
     end
   end

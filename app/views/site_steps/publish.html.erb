@@ -74,7 +74,7 @@
 											          </div>
 											          <div class='step-pane active' id='step4'>
 											            <h2>预览效果</h2>
-											            <iframe src="/theme/show?id=<%=@site.theme_id%>&s=<%=@site.site_name%>" border="1" width="850px" height="700px"></iframe>
+											            <iframe src="/sites/<%=@site.id %>" border="1" width="850px" height="700px"></iframe>
 											            <%= render layout: 'form' do |f| %>
 																	  <fieldset>
 																	    <%= f.input :is_published %>

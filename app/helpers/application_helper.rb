@@ -50,6 +50,11 @@ module ApplicationHelper
     arr.join.html_safe
   end
 
+  def check_nil(resource)
+    if resource.nil?
+      redirect_to "/", notice: "没有找到"
+    end
+  end
   #flash动画显示
   # eg: play_flash("flash/top_banner.swf")
   # or: play_flash asset_path("flash/top_banner.swf"), :width => '985', :height => '249'

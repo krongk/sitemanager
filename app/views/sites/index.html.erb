@@ -4,9 +4,10 @@
 <% @sites.each do |site| %>
   <tr>
     <td><%= site.site_name %></td>
+    <td><%= site.site_title %></td>
     <td><%= site.domain %></td>
     <td><%= site.theme_id %></td>
-    <td><%= link_to '查看', site %></td>
+    <td><%= link_to '查看', site_path(site.site_name) %></td>
     <td><%= link_to '修改', edit_site_path(site) %></td>
     <td><%= link_to '删除', site, method: :delete, data: { confirm: '确定要删除吗？ 此操作不可逆转，请慎重考虑?' } %></td>
   </tr>

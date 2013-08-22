@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130820125507) do
+ActiveRecord::Schema.define(:version => 20130822144634) do
 
   create_table "keystores", :id => false, :force => true do |t|
     t.string   "key",        :limit => 50, :default => "", :null => false
@@ -94,17 +94,18 @@ ActiveRecord::Schema.define(:version => 20130820125507) do
   add_index "roles", ["name"], :name => "index_roles_on_name"
 
   create_table "sites", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "site_name",    :limit => 32,                    :null => false
-    t.string   "domain"
+    t.integer  "user_id",                                        :null => false
+    t.string   "site_name",    :limit => 32,                     :null => false
+    t.string   "site_title",   :limit => 128,                    :null => false
+    t.string   "domain",       :limit => 128
     t.integer  "theme_id"
     t.text     "head"
     t.text     "header"
     t.text     "body"
     t.text     "footer"
-    t.boolean  "is_published",               :default => false
-    t.datetime "created_at",                                    :null => false
-    t.datetime "updated_at",                                    :null => false
+    t.boolean  "is_published",                :default => false
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
   end
 
   add_index "sites", ["site_name"], :name => "index_sites_on_site_name", :unique => true
@@ -151,6 +152,16 @@ ActiveRecord::Schema.define(:version => 20130820125507) do
   create_table "tags", :force => true do |t|
     t.string "name"
   end
+
+  create_table "themes", :force => true do |t|
+    t.string   "name",        :limit => 64,                :null => false
+    t.string   "tags"
+    t.integer  "share_count",               :default => 1
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
+
+  add_index "themes", ["name"], :name => "index_themes_on_name", :unique => true
 
   create_table "user_details", :force => true do |t|
     t.integer  "user_id",                           :null => false

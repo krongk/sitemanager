@@ -1,0 +1,16 @@
+<h1>网页模板</h1>
+
+<table class="table border="" ">
+  <% @themes.each do |theme| %>
+  <tr>
+    <td><%= theme.name %></td>
+    <td><%= theme.tags %></td>
+    <td><%= theme.share_count %></td>
+    <td><%= link_to '查看', theme %></td>
+    <td><%= link_to '编辑', edit_theme_path(theme) %></td>
+    <td><%= link_to '删除', theme, method: :delete, data: { confirm: '确定删除?' } %></td>
+  </tr>
+  <% end %>
+</table>
+
+<%= link_to "增加模板", new_theme_path, :html => {:class => 'btn btn-primary btn-large'} %>

@@ -1,6 +1,6 @@
 RailsComposerApp2::Application.routes.draw do
 
-  get "theme/show"
+  resources :themes
 
   resources :sites
   resources :site_steps

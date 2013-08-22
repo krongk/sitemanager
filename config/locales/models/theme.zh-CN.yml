@@ -1,0 +1,15 @@
+#encoding: utf-8
+zh-CN:
+  activerecord:
+    models:
+      theme: 网页模板
+    attributes:
+      theme:
+        name: 名称
+        tags: 标签
+        share_count: 共享次数
+        css_url: CSS路径
+    errors:
+      theme: 
+  helpers:
+    theme: 

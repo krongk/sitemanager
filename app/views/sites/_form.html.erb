@@ -33,9 +33,14 @@
               <fieldset>
                 <% if @site.new_record? %>
                   <%= f.input :site_name, :required => true, :input_html => {:class => "span12 icon-over-input"}, wrapper_html: { class: 'row-fluid' }  %>
-                  <label>网站名作为访问网站的唯一标示，一旦创建则不能修改. 网站名由3-30位字母和数字的组合，如: http://www.65960.com/s-<span style="color:red;background:#ddd;">mysite</span></label>
+                  <label>网站唯一标示作为访问网站的路径名，一旦创建则不能修改. 网站名由3-30位字母和数字的组合，如: http://www.65960.com/s-<span style="color:red;background:#ddd;">mysite</span></label>
+                  <br>
+                  <%= f.input :site_title, :required => true, :input_html => {:class => "span12 icon-over-input"}, wrapper_html: { class: 'row-fluid' }  %>
                 <% else %>
-                  <%= f.input :site_name, :disabled => true, :required => true, hint: "网站名不能修改",  :input_html => {:class => "span12 icon-over-input"}, wrapper_html: { class: 'row-fluid' } %>
+                  <%= f.input :site_name, :disabled => true, :required => true, hint: "网站唯一标示名不能修改",  :input_html => {:class => "span12 icon-over-input"}, wrapper_html: { class: 'row-fluid' } %>
+
+                  <br>
+                  <%= f.input :site_title, :required => true, :input_html => {:class => "span12 icon-over-input"}, wrapper_html: { class: 'row-fluid' }  %>
                 <% end %>
               </fieldset>
 

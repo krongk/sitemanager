@@ -1,7 +1,9 @@
 #encoding: utf-8
 class Site < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :user_id, :body, :domain, :footer, :head, :header, :site_name, :theme_id, :is_published
+  attr_accessible :user_id, :body, :domain, :footer, :head, :header, :site_name, :site_title, :theme_id, :is_published
+
+  belongs_to :theme
 
   validates_presence_of :site_name
   validates_presence_of :user_id
@@ -11,6 +13,7 @@ class Site < ActiveRecord::Base
   end
   validates_uniqueness_of :site_name, :case_sensitive => false
   
+
   #validates_format_of :twitter_username, without: /\W/, allow_blank: true
   #validates_presence_of :theme_id, if: :on_theme_step?
 end

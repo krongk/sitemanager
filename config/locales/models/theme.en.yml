@@ -1,0 +1,14 @@
+---
+en:
+  active_record:
+    models:
+      theme: Theme
+    attributes:
+      theme:
+        name: Name
+        tags: Tags
+        share_count: Share count
+    errors:
+      theme: 
+  helpers:
+    theme: 

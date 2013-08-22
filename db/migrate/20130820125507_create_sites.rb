@@ -3,6 +3,7 @@ class CreateSites < ActiveRecord::Migration
     create_table :sites do |t|
       t.references :user
       t.string :site_name, :limit => 32, :null => false
+      t.string :site_title, :limit => 128, :null => false
       t.string :domain
       t.integer :theme_id
       t.text :head
