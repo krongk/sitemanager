@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130822144634) do
+ActiveRecord::Schema.define(:version => 20130823083115) do
 
   create_table "keystores", :id => false, :force => true do |t|
     t.string   "key",        :limit => 50, :default => "", :null => false
@@ -93,6 +93,19 @@ ActiveRecord::Schema.define(:version => 20130822144634) do
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
 
+  create_table "site_posts", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "site_id"
+    t.string   "title"
+    t.text     "content"
+    t.integer  "cate_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "site_posts", ["site_id"], :name => "index_site_posts_on_site_id"
+  add_index "site_posts", ["user_id"], :name => "index_site_posts_on_user_id"
+
   create_table "sites", :force => true do |t|
     t.integer  "user_id",                                        :null => false
     t.string   "site_name",    :limit => 32,                     :null => false
@@ -157,6 +170,7 @@ ActiveRecord::Schema.define(:version => 20130822144634) do
     t.string   "name",        :limit => 64,                :null => false
     t.string   "tags"
     t.integer  "share_count",               :default => 1
+    t.string   "css_url",                                  :null => false
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
   end

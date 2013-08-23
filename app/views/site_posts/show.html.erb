@@ -51,5 +51,6 @@
   </div>
 <% end %>
 
-<%= @site.user.user_detail.company_description %>
-<%= raw @site.body %>
+<h2><%= @site_post.title %></h2>
+<hr>
+<%= raw @site_post.content %>

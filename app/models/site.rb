@@ -1,9 +1,10 @@
 #encoding: utf-8
 class Site < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :user_id, :body, :domain, :footer, :head, :header, :site_name, :site_title, :theme_id, :is_published
-
   belongs_to :theme
+  has_many :site_posts
+
+  attr_accessible :user_id, :body, :domain, :footer, :head, :header, :site_name, :site_title, :theme_id, :is_published
 
   validates_presence_of :site_name
   validates_presence_of :user_id

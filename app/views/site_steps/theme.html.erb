@@ -79,7 +79,7 @@
                 <%= theme.share_count %>
             </div>
             <div class='pull-right'> 
-                选择<input id="site_theme_id_<%=theme.id%>" name="site[theme_id]" type="radio" value="<%= theme.id %>">
+                选择<input id="site_theme_id_<%=theme.id%>" name="site[theme_id]" type="radio" value="<%= theme.id %>" <% if theme.id == @site.theme_id then%> checked="true"<% end %> >
             </div>
         </div>
         <%= image_tag  asset_path("theme/#{theme.name}.png"), :width => '400px' %>

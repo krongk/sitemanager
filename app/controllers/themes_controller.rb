@@ -1,5 +1,6 @@
 #encoding: utf-8
 class ThemesController < ApplicationController
+  before_filter :authenticate_user!, :except => [:index, :show]
 
   def index
     @themes = Theme.all

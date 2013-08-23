@@ -1,6 +1,8 @@
 #encoding: utf-8
 class SitesController < ApplicationController
   include ApplicationHelper
+  before_filter :authenticate_user!, :except => [:index, :show]
+
   layout 'theme', :only => [:show]
 
   before_filter :authenticate_user!, :except => [:index, :show]
@@ -9,7 +11,8 @@ class SitesController < ApplicationController
   # GET /sites.json
   def index
     @sites = current_user.sites.all
-
+    @site_posts = SitePost.where(:user_id => current_user.id).order("updated_at DESC").paginate(:page => params[:page] || 1, :per_page => 20)
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @sites }

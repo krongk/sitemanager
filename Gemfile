@@ -57,7 +57,7 @@ gem 'chinese_pinyin'
 	#gem "will_paginate", "3.0.pre2"
 
 	#setup bootstrap patinate: https://github.com/yrgoldteeth/bootstrap-will_paginate
-	#gem 'bootstrap-will_paginate'
+gem 'bootstrap-will_paginate'
 
 #https://github.com/kjvarga/sitemap_generator
 #gem 'sitemap_generator'

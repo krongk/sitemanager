@@ -1,0 +1,29 @@
+<h1 class="pull-left">
+  <i class="icon-star"></i>
+  <span>添加文章</span>
+</h1>
+<hr>
+
+<!-- content of page -->
+<div class="row-fluid">
+    <div class="span12 box">
+        <div class="box-header blue-background">
+            <div class="title">
+                <div class="icon-edit"></div>
+                添加文章
+            </div>
+            <div class="actions">
+                <a href="#" class="btn box-remove btn-mini btn-link"><i class="icon-remove"></i>
+                </a>
+                <a href="#" class="btn box-collapse btn-mini btn-link"><i></i>
+                </a>
+            </div>
+        </div>
+        <div class="box-content">
+          <%= render 'form' %>
+        </div>
+    </div>
+</div>
+
+
+<%= link_to '返回', sites_path %>
