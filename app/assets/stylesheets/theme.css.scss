@@ -1,6 +1,8 @@
-// Place all the styles related to the theme controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+/*
+ *= require scaffolds
+ *= require_self
+*/
+
 
 .theme .container{
 	max-width: 800px;
@@ -11,3 +13,4 @@
 .theme .sidebar{
   
 }
+

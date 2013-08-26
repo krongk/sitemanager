@@ -22,7 +22,7 @@ class SitesController < ApplicationController
   # GET /sites/1
   # GET /sites/1.json
   def show
-    @site = params[:id] =~ /^\d+$/ ? current_user.sites.find_by_id(params[:id]) : current_user.sites.find_by_site_name(params[:id])
+    @site = params[:id] =~ /^\d+$/ ? Site.find_by_id(params[:id]) : Site.find_by_site_name(params[:id])
     return check_nil(@site)
 
     respond_to do |format|

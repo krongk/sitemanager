@@ -4,7 +4,7 @@
 
 <% content_for :head do %>
   <link href="<%= @site.theme.css_url%>" rel="stylesheet">
-  <%= @site.head %>
+  <%= raw @site.head %>
 <% end %>
 
 <% content_for :header do %>
@@ -51,6 +51,16 @@
   </div>
 <% end %>
 
-<h2><%= @site_post.title %></h2>
-<hr>
-<%= raw @site_post.content %>
+<% if params[:id] == 'post_list' %>
+  <ul>
+  <% @site_posts.each do |site_post| %>
+    <li><%= link_to site_post.title, site_site_post_path(site_post.site, site_post) %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<% unless @site_post.nil? || params[:id] == 'post_list' %>
+  <h2><%= @site_post.title %></h2>
+  <hr>
+  <%= raw @site_post.content %>
+<% end %>

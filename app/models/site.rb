@@ -3,6 +3,7 @@ class Site < ActiveRecord::Base
   belongs_to :user
   belongs_to :theme
   has_many :site_posts
+  has_many :site_comments
 
   attr_accessible :user_id, :body, :domain, :footer, :head, :header, :site_name, :site_title, :theme_id, :is_published
 

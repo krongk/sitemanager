@@ -1,0 +1,17 @@
+<%= simple_form_for([@site, @site_comment],  :html => {:class => 'form-horizontal' }) do |f| %>
+  <%= f.error_notification %>
+
+  <fieldset>
+    <%#= f.association :site %>
+    <%= f.input :name%>
+    <%= f.input :mobile_phone %>
+    <%= f.input :email %>
+    <%= f.input :content, input_html: {cols: 80, rows: 10} %>
+  </fieldset>
+
+  <div class='form-actions' style='margin: 10px 0;'>
+    <%= button_tag(type: 'submit', class: "btn btn-primary btn-large") do %>
+      <i class='icon-save'></i> 提交
+    <% end %>
+  </div>
+<% end %>

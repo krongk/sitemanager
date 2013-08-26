@@ -1,13 +1,12 @@
 RailsComposerApp2::Application.routes.draw do
 
-  
-
-
   resources :themes
 
   resources :site_posts
+  #resources :site_comments
   resources :sites do
     resources :site_posts
+    resources :site_comments
   end
   match "s-(:id)" => "sites#show"
   match "s-(:site_id)/p-(:id)" => "site_posts#show"

@@ -1,11 +1,16 @@
 #encoding: utf-8
 class SitePostsController < ApplicationController
-  layout 'theme', :only => [:show]
+  before_filter :authenticate_user!, :except => [:show, :index]
+  layout 'theme', :only => [:show, :index]
 
   # GET /site_posts
   # GET /site_posts.json
   def index
-    @site_posts = SitePost.all
+    @site = Site.find_by_id(params[:site_id])
+    @site ||= Site.find_by_site_name(params[:site_id])
+    return check_nil(@site)
+
+    @site_posts = @site.site_posts.where("cate_id = 0").order("updated_at DESC").paginate(:page => params[:page] || 1, :per_page => 8)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,8 +21,21 @@ class SitePostsController < ApplicationController
   # GET /site_posts/1
   # GET /site_posts/1.json
   def show
-    @site_post = SitePost.find(params[:id])
-    @site = @site_post.site
+    #{"action"=>"show", "controller"=>"site_posts", "site_id"=>"1", "id"=>"1"}
+    @site = Site.find_by_id(params[:site_id])
+    case params[:id]
+    when 'about'
+      @site_posts = @site.site_posts.select{|p| p.cate_id == SitePost.cate_id("关于我们")}
+    when 'service'
+      @site_posts = @site.site_posts.select{|p| p.cate_id == SitePost.cate_id("服务项目")}
+    when 'post_list'
+      @site_posts = @site.site_posts.select{|p| p.cate_id == SitePost.cate_id("新闻")}
+    else
+      @site_posts = @site.site_posts
+    end
+
+    @site_post = SitePost.find_by_id(params[:id])
+    @site_post ||= @site_posts.first
 
     respond_to do |format|
       format.html # show.html.erb

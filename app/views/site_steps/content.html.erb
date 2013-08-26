@@ -65,11 +65,13 @@
 											          <div class='step-pane active' id='step3'>
 																	<%= render layout: 'form' do |f| %>
 																	  <fieldset>
-																	    <%= f.input :head, hint: "保存页头信息，如引用的css路径，js代码。", :input_html => {:class => "span12 icon-over-input"}, wrapper_html: { class: 'row-fluid' } %>
+<%= f.input :head, hint: "保存页头信息，如引用的css样式，js代码。", :input_html => {:value => @site.head.nil? ? Site.first.head : @site.head, :class => "span12 icon-over-input"}, wrapper_html: { class: 'row-fluid' } %>
 
-																	    <%= f.input :header, :input_html => {:class => "span12 icon-over-input"}, wrapper_html: { class: 'row-fluid' } %>
-																	    <%= f.input :body, :input_html => {:class => "span12 icon-over-input input-block-level wysihtml5"}, wrapper_html: { class: 'row-fluid', rows: '15', value: @site.user.user_detail.company_description } %>
-																	    <%= f.input :footer, :input_html => {:class => "span12 icon-over-input"}, wrapper_html: { class: 'row-fluid' } %>
+<%= f.input :header, :input_html => {:value => @site.header.nil? ? Site.first.header : @site.header, :class => "span12 icon-over-input"}, wrapper_html: { class: 'row-fluid' } %>
+
+<%= f.input :body, :input_html => {:class => "span12 icon-over-input input-block-level wysihtml5"}, wrapper_html: { class: 'row-fluid', rows: '15', value: @site.user.user_detail.company_description } %>
+
+<%= f.input :footer, :input_html => {:value => @site.footer.nil? ? Site.first.footer : @site.footer, :class => "span12 icon-over-input"}, wrapper_html: { class: 'row-fluid' } %>
 																	  </fieldset>
 																	<% end %>
 											          </div>

@@ -190,6 +190,15 @@ rails g scaffold user_detail user:references contact_name:string id_card:string 
     theme - 选择模版
     content - 添加公共内容
     publish - 发布（生成静态网页目录）
+
+    content - 公共内容部分说明
+      head - 可以保存定制的css代码和js代码， 放在标签<head>里
+      header - 往往是存放导航条的地方， 导航条完全自我定制，默认值会选择Site.first.header填充，为其填充一个标准的bootstrap固定顶部导航
+      content - 网站主页内容部分，除了主页，其他也都作为site_post对象处理
+      footer - 页脚部分定制代码，可存放统计代码，友情链接，版权声明等
+    网站自动集成的内容：
+      多说评论
+      公司信息（来自于site.user.user_detail)
     </pre>
 
     <h2>关于模板</h2>
@@ -202,6 +211,8 @@ rails g scaffold user_detail user:references contact_name:string id_card:string 
     模板样式采用Bootswatch: http://netdna.bootstrapcdn.com/
         通过选择模板，将Bootswatch的css链接传过来。
     </pre>
+
+
 </section>
 
 <br>

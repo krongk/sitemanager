@@ -63,7 +63,13 @@ module ApplicationHelper
   def check_nil(resource)
     if resource.nil?
       redirect_to "/", notice: "没有找到"
+      return
     end
+  end
+
+  def generate_site_post_url(site, title)
+    return site_path(site) unless ['about', 'service', 'post_list'].include?(title)
+    "/sites/#{site.id}/site_posts/#{title}"
   end
   #flash动画显示
   # eg: play_flash("flash/top_banner.swf")

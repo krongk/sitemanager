@@ -1,31 +1,24 @@
-<h1>Listing site_posts</h1>
+<% title @site.site_title %>
+<% meta_keywords @site.user.user_detail.company_keywords %>
+<% meta_description @site.user.user_detail.company_keywords %>
 
-<table>
-  <tr>
-    <th>User</th>
-    <th>Site</th>
-    <th>Title</th>
-    <th>Content</th>
-    <th>Cate</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @site_posts.each do |site_post| %>
-  <tr>
-    <td><%= site_post.user %></td>
-    <td><%= site_post.site %></td>
-    <td><%= site_post.title %></td>
-    <td><%= site_post.content %></td>
-    <td><%= site_post.cate_id %></td>
-    <td><%= link_to 'Show', site_post %></td>
-    <td><%= link_to 'Edit', edit_site_post_path(site_post) %></td>
-    <td><%= link_to 'Destroy', site_post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<% content_for :head do %>
+  <link href="<%= @site.theme.css_url%>" rel="stylesheet">
+  <%= raw @site.head %>
 <% end %>
-</table>
+
+<% content_for :header do %>
+  <%= raw @site.header %>
+<% end %>
+
+<% content_for :footer do %>
+  <%= raw @site.footer %>
+<% end %>
+
+<ul>
+    <% @site_posts.each do |site_post| %>
+        <li><%= link_to site_post.title, site_post %></li>
+    <% end %>
+</ul>
 
 <br />
-
-<%= link_to 'New Site post', new_site_post_path %>

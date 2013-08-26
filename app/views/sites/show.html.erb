@@ -4,7 +4,7 @@
 
 <% content_for :head do %>
   <link href="<%= @site.theme.css_url%>" rel="stylesheet">
-  <%= @site.head %>
+  <%= raw @site.head %>
 <% end %>
 
 <% content_for :header do %>
@@ -51,5 +51,14 @@
   </div>
 <% end %>
 
-<%= @site.user.user_detail.company_description %>
-<%= raw @site.body %>
+
+ <%= raw @site.body %>
+ 
+<div class="hero-unit">
+  <h1><%= @site.user.user_detail.company_name %></h1>
+  <p>
+    <%= @site.user.user_detail.company_description %>
+  </p>
+</div>
+
+

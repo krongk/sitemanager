@@ -10,8 +10,8 @@ zh-CN:
         site_title: 网站名称
         domain: 域名
         theme_id: 模版
-        head: 页头
-        header: 导航
+        head: HEAD部分
+        header: 页头
         body: 内容
         footer: 页脚
     errors:

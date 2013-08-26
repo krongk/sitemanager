@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130823083115) do
+ActiveRecord::Schema.define(:version => 20130824051300) do
 
   create_table "keystores", :id => false, :force => true do |t|
     t.string   "key",        :limit => 50, :default => "", :null => false
@@ -93,6 +93,20 @@ ActiveRecord::Schema.define(:version => 20130823083115) do
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
 
+  create_table "site_comments", :force => true do |t|
+    t.integer  "site_id"
+    t.string   "name"
+    t.string   "mobile_phone", :limit => 32, :null => false
+    t.string   "email",        :limit => 32
+    t.text     "content"
+    t.string   "is_processed"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  add_index "site_comments", ["mobile_phone"], :name => "index_site_comments_on_mobile_phone"
+  add_index "site_comments", ["site_id"], :name => "index_site_comments_on_site_id"
+
   create_table "site_posts", :force => true do |t|
     t.integer  "user_id"
     t.integer  "site_id"
@@ -111,7 +125,7 @@ ActiveRecord::Schema.define(:version => 20130823083115) do
     t.string   "site_name",    :limit => 32,                     :null => false
     t.string   "site_title",   :limit => 128,                    :null => false
     t.string   "domain",       :limit => 128
-    t.integer  "theme_id"
+    t.integer  "theme_id",                    :default => 1
     t.text     "head"
     t.text     "header"
     t.text     "body"

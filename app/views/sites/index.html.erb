@@ -143,9 +143,10 @@
             <div class='accordion-group'>
                 <div class='accordion-heading'>
                 <a class='accordion-toggle' data-parent='#accordion2' data-toggle='collapse' href='#collapse<%=index%>-accordion2'>
-                      <span class="badge badge-<%=rand_flag%>"><%=item.id%></span>
-                      <%= item.title %>
-                    </a>
+                    <span class="badge badge-important"><%= item.site.site_name %></span>
+                    <span class="badge badge-info"><%= SitePost.cates[item.cate_id] %></span>
+                    <%= item.title %>
+                  </a>
                 </div>
                 <div class='accordion-body collapse' id='collapse<%=index%>-accordion2'>
                     <div class='accordion-inner'>

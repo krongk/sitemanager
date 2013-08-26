@@ -1,0 +1,17 @@
+#encoding: utf-8
+zh-CN:
+  activerecord:
+    models:
+      site_comment: 网站留言
+    attributes:
+      site_comment:
+        site: 网站
+        name: 姓名
+        mobile_phone: 手机号码
+        email: 电子邮箱
+        content: 留言内容
+        is_processed: 是否处理
+    errors:
+      site_comment: 
+  helpers:
+    site_comment: 
