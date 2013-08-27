@@ -2,9 +2,9 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :tags %>
-    <%= f.input :css_url %>
+    <%= f.input :name, hint: "名字必须跟/images/theme/name.png下面图片的名字一致" %>
+    <%= f.input :tags, hint: "用空格或者逗号隔开" %>
+    <%= f.input :css_url, hint: "链接地址来源：http://www.bootstrapcdn.com/"%>
   </div>
 
   <div class="form-actions">

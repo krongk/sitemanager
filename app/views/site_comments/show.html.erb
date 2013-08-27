@@ -1,35 +1,27 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Site:</b>
-  <%= @site_comment.site %>
+  <%= @site_comment.site.site_name %>
 </p>
 
 <p>
-  <b>Name:</b>
   <%= @site_comment.name %>
 </p>
 
 <p>
-  <b>Mobile phone:</b>
   <%= @site_comment.mobile_phone %>
 </p>
 
 <p>
-  <b>Email:</b>
   <%= @site_comment.email %>
 </p>
 
 <p>
-  <b>Content:</b>
   <%= @site_comment.content %>
 </p>
 
 <p>
-  <b>Is processed:</b>
   <%= @site_comment.is_processed %>
 </p>
 
-
-<%= link_to 'Edit', edit_site_comment_path(@site_comment) %> |
-<%= link_to 'Back', site_comments_path %>
+<%= link_to '返回', site_comments_path %>

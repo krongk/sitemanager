@@ -56,7 +56,7 @@
                     <%= f.input :company_reg_code %>
                 </div>
                 <div class='span5'>
-                    <%= f.input :company_keywords %>
+                    <%= f.input :company_keywords, place_holder: '用空格隔开', input_html: { class: 'input-block-level'} %>
                     <%= f.input :company_description, as: :text, input_html: {cols: 4, rows: 8, class: 'autosize input-block-level'} %>
                 </div>
             </div>

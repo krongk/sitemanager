@@ -1,33 +1,86 @@
-<h1>Listing site_comments</h1>
+<!-- page header container -->
+<div class="row-fluid">
+  <div class="span12">
+    <div class="page-header">
 
-<table>
-  <tr>
-    <th>Site</th>
-    <th>Name</th>
-    <th>Mobile phone</th>
-    <th>Email</th>
-    <th>Content</th>
-    <th>Is processed</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+      <!-- page title -->
+      <h1 class="pull-left">
+        <i class="icon-star"></i>
+        <span>站内通-留言管理</span>
+      </h1>
+
+      <!-- breadcrumbs -->
+      <div class="pull-right">
+        <ul class="breadcrumb">
+          <li>
+            <a href="/home/index"><i class="icon-bar-chart"></i>
+            </a>
+          </li>
+          <li class="separator">
+            <i class="icon-angle-right"></i>
+          </li>
+          <li class="active">网站留言管理</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- datatable -->
+<div class='row-fluid'>
+    <div class='span12 box bordered-box orange-border' style='margin-bottom:0;'>
+        <div class='box-header'>
+            <div class='title'>网站留言</div>
+            <div class='actions'>
+                <a href="#" class="btn box-remove btn-mini btn-link"><i class='icon-remove'></i>
+                </a>
+                <a href="#" class="btn box-collapse btn-mini btn-link"><i></i>
+                </a>
+            </div>
+        </div>
+        <div class='box-content box-no-padding'>
+            <div class='responsive-table'>
+                <div class='scrollable-area'>
+
+<table class='data-table-column-filter table table-bordered table-striped' style='margin-bottom:0;'>
+<thead>
+<tr>
+    <th>网站</th>
+    <th>姓名</th>
+    <th>手机号</th>
+    <th>电子邮箱</th>
+    <th>是否处理</th>
+    <th>操作</th>
+</tr>
+</thead>
+<tbody>
 
 <% @site_comments.each do |site_comment| %>
   <tr>
-    <td><%= site_comment.site %></td>
+    <td><%= site_comment.site.site_name %></td>
     <td><%= site_comment.name %></td>
     <td><%= site_comment.mobile_phone %></td>
     <td><%= site_comment.email %></td>
-    <td><%= site_comment.content %></td>
     <td><%= site_comment.is_processed %></td>
-    <td><%= link_to 'Show', site_comment %></td>
-    <td><%= link_to 'Edit', edit_site_comment_path(site_comment) %></td>
-    <td><%= link_to 'Destroy', site_comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to '编辑', edit_site_site_comment_path(site_comment.site, site_comment), class: 'btn btn-primary' %>
+    <%= link_to '删除', site_comment, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-warning' %></td>
+  </tr>
+  <tr>
+    <td colspan="7"><div class="pull-left" style="max-width: 900px;"><%= site_comment.content %></div></td>
   </tr>
 <% end %>
+</tbody>
+<tfoot>
+<tr>
+    <th>网站</th>
+    <th>姓名</th>
+    <th>手机号</th>
+    <th>电子邮箱</th>
+    <th>是否处理</th>
+    <th>操作</th>
+</tr>
+</tfoot>
 </table>
-
-<br />
-
-<%= link_to 'New Site comment', new_site_comment_path %>
+</div></div></div></div>
+</div><!-- end datatable -->

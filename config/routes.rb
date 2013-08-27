@@ -3,7 +3,7 @@ RailsComposerApp2::Application.routes.draw do
   resources :themes
 
   resources :site_posts
-  #resources :site_comments
+  resources :site_comments
   resources :sites do
     resources :site_posts
     resources :site_comments
@@ -43,6 +43,10 @@ RailsComposerApp2::Application.routes.draw do
   get "home/index"
   get "home/sms"
   get "home/email"
+  get "home/qq"
+  get "home/map"
+  get "home/share"
+  get "home/blog"
   root :to => "home#index"
   authenticated :user do
     root :to => 'home#index'

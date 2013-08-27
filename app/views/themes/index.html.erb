@@ -3,6 +3,7 @@
 <table class="table border="" ">
   <% @themes.each do |theme| %>
   <tr>
+    <td><%= image_tag  asset_path("theme/#{theme.name}.png"), :width => '200px' %></td>
     <td><%= theme.name %></td>
     <td><%= theme.tags %></td>
     <td><%= theme.share_count %></td>

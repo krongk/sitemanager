@@ -15,7 +15,15 @@ class Site < ActiveRecord::Base
   end
   validates_uniqueness_of :site_name, :case_sensitive => false
   
+  #
+  after_create :increment_total_count
+  after_destroy :decrement_total_count
 
-  #validates_format_of :twitter_username, without: /\W/, allow_blank: true
-  #validates_presence_of :theme_id, if: :on_theme_step?
+  def increment_total_count
+    Keystore.increment_value_for("user:#{self.user_id}:sites_count")
+  end
+  def decrement_total_count
+    Keystore.decrement_value_for("user:#{self.user_id}:sites_count")
+  end
+
 end

@@ -9,14 +9,14 @@
 
     <%= f.input :user_id, as: :hidden, input_html: {value: current_user.id} %>
     <%= f.input :title, input_html: { class: 'input-block-level' } %>
-    <%= f.input :content, :input_html => {:class => "span12 icon-over-input input-block-level wysihtml5"}, wrapper_html: { class: 'row-fluid', rows: '15'} %>
+    <%= f.input :content, :input_html => {:class => "span12 icon-over-input input-block-level wysihtml5", rows: '25'}, wrapper_html: { class: 'row-fluid'} %>
   </fieldset>
   <div class="row-fluid">
     <div class="span6">
-      <%= f.association :site, as: :radio_buttons, label_method: :site_title %>
+      <%= f.association :site, as: :radio_buttons, label_method: :site_title, label_html: {class: 'box orange-background'} %>
     </div>
     <div class="span6">
-      <label class="radio_buttons optional control-label">*类别(不能为空)</label>
+      <label class="radio_buttons optional control-label box orange-background">*类别(不能为空)</label>
       <%= f.collection_radio_buttons :cate_id, SitePost.cates.map{|s| [SitePost.cates.index(s), s]}, :first, :last %>
     </div>
   </div>

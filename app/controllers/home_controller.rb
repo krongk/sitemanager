@@ -18,6 +18,17 @@ class HomeController < ApplicationController
     @resource_item = ResourceItem.new
     @mail_item = MailItem.new
   end
+
+  def qq
+  end
+  def map
+  end
+  def share
+  end
+  def blog
+  end
+  
+
   
 
 end

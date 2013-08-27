@@ -71,6 +71,60 @@ module ApplicationHelper
     return site_path(site) unless ['about', 'service', 'post_list'].include?(title)
     "/sites/#{site.id}/site_posts/#{title}"
   end
+
+  def box_content(title, &block)
+    %{
+      <div class='row-fluid'>
+        <div class='span12 box'>
+          <div class='box-header'>
+              <div class='title'>#{title}</div>
+              <div class='actions'>
+                  <a href="#" class="btn box-remove btn-mini btn-link"><i class='icon-remove'></i>
+                  </a>
+                  <a href="#" class="btn box-collapse btn-mini btn-link"><i></i>
+                  </a>
+              </div>
+          </div>
+          <div class='box-content'>
+           #{ yield(block)}
+          </div>
+        </div>
+      </div>
+    }.html_safe
+  end
+
+  def page_header(title, sub_title)
+    %{
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="page-header">
+
+            <!-- page title -->
+            <h1 class="pull-left">
+              <i class="icon-star"></i>
+              <span>#{title}</span>
+            </h1>
+
+            <!-- breadcrumbs -->
+            <div class="pull-right">
+              <ul class="breadcrumb">
+                <li>
+                  <a href="/home/index"><i class="icon-bar-chart"></i>
+                  </a>
+                </li>
+                <li class="separator">
+                  <i class="icon-angle-right"></i>
+                </li>
+                <li class="active">#{sub_title}</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    }.html_safe
+  end
+
   #flash动画显示
   # eg: play_flash("flash/top_banner.swf")
   # or: play_flash asset_path("flash/top_banner.swf"), :width => '985', :height => '249'

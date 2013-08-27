@@ -3,10 +3,14 @@
 
   <fieldset>
     <%#= f.association :site %>
+    <%= f.input :site_id, as: :hidden, input_html: {value: @site.id} %>
     <%= f.input :name%>
     <%= f.input :mobile_phone %>
     <%= f.input :email %>
     <%= f.input :content, input_html: {cols: 80, rows: 10} %>
+    <% unless @site_comment.new_record? %>
+      <%= f.input :is_processed, as: :radio_buttons %>
+    <% end %>
   </fieldset>
 
   <div class='form-actions' style='margin: 10px 0;'>

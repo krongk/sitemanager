@@ -12,7 +12,8 @@ class SitesController < ApplicationController
   def index
     @sites = current_user.sites.all
     @site_posts = SitePost.where(:user_id => current_user.id).order("updated_at DESC").paginate(:page => params[:page] || 1, :per_page => 20)
-    
+    @site_comments = SiteComment.where(:site_id => @sites.map(&:id)).order("updated_at DESC").limit(20)
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @sites }

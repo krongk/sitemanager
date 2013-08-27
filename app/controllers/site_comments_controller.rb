@@ -5,8 +5,8 @@ class SiteCommentsController < ApplicationController
   # GET /site_comments
   # GET /site_comments.json
   def index
-    @site_comments = SiteComment.all
-
+    @site_comments = SiteComment.where(:site_id => current_user.sites.map(&:id)).order("updated_at DESC").paginate(:page => params[:page] || 1, :per_page => 20)
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @site_comments }
@@ -38,7 +38,9 @@ class SiteCommentsController < ApplicationController
 
   # GET /site_comments/1/edit
   def edit
+    @site = Site.find_by_id(params[:site_id])
     @site_comment = SiteComment.find(params[:id])
+
   end
 
   # POST /site_comments
@@ -49,7 +51,7 @@ class SiteCommentsController < ApplicationController
 
     respond_to do |format|
       if @site_comment.save
-        format.html { redirect_to new_site_comment_path, notice: '感谢您的留言，我们会尽快处理.' }
+        format.html { redirect_to site_path(@site), notice: '感谢您的留言，我们会尽快处理.' }
         format.json { render json: @site_comment, status: :created, location: @site_comment }
       else
         format.html { render action: "new" }
@@ -61,11 +63,12 @@ class SiteCommentsController < ApplicationController
   # PUT /site_comments/1
   # PUT /site_comments/1.json
   def update
+    @site = Site.find_by_id(params[:site_id])
     @site_comment = SiteComment.find(params[:id])
 
     respond_to do |format|
       if @site_comment.update_attributes(params[:site_comment])
-        format.html { redirect_to @site_comment, notice: 'Site comment was successfully updated.' }
+        format.html { redirect_to site_comments_path, notice: '留言更新成功.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
