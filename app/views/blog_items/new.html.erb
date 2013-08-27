@@ -1,0 +1,7 @@
+<%= page_header("博客通", "博客营销") %>
+
+<%= render :layout => "/common/box", :locals => {:color => 'blue', :title => '博客营销'} do %>
+	<%= render 'form' %>
+<% end %>
+
+<%= link_to '返回', blog_items_path %>

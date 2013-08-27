@@ -26,9 +26,8 @@ class HomeController < ApplicationController
   def share
   end
   def blog
+    @blog_items = BlogItem.all
+    @user_blogs = current_user.user_blogs
   end
   
-
-  
-
 end

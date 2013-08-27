@@ -1,5 +1,11 @@
 RailsComposerApp2::Application.routes.draw do
 
+  resources :user_blogs
+
+
+  resources :blog_items
+
+
   resources :themes
 
   resources :site_posts

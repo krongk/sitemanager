@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Cate:</b>
+  <%= @blog_item.cate_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @blog_item.name %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%= @blog_item.url %>
+</p>
+
+<p>
+  <b>Register url:</b>
+  <%= @blog_item.register_url %>
+</p>
+
+
+<%= link_to 'Edit', edit_blog_item_path(@blog_item) %> |
+<%= link_to 'Back', blog_items_path %>

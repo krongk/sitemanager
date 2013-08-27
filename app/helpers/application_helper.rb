@@ -72,27 +72,6 @@ module ApplicationHelper
     "/sites/#{site.id}/site_posts/#{title}"
   end
 
-  def box_content(title, &block)
-    %{
-      <div class='row-fluid'>
-        <div class='span12 box'>
-          <div class='box-header'>
-              <div class='title'>#{title}</div>
-              <div class='actions'>
-                  <a href="#" class="btn box-remove btn-mini btn-link"><i class='icon-remove'></i>
-                  </a>
-                  <a href="#" class="btn box-collapse btn-mini btn-link"><i></i>
-                  </a>
-              </div>
-          </div>
-          <div class='box-content'>
-           #{ yield(block)}
-          </div>
-        </div>
-      </div>
-    }.html_safe
-  end
-
   def page_header(title, sub_title)
     %{
       <div class="row-fluid">

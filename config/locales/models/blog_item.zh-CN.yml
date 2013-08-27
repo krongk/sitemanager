@@ -1,0 +1,15 @@
+#encoding: utf-8
+zh-CN:
+  activerecord:
+    models:
+      blog_item: 博客列表
+    attributes:
+      blog_item:
+        cate_id: 类型
+        name: 名称
+        url: 网址
+        register_url: 注册网址
+    errors:
+      blog_item: 
+  helpers:
+    blog_item: 

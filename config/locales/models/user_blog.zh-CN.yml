@@ -1,0 +1,18 @@
+#encoding: utf-8
+zh-CN:
+  activerecord:
+    models:
+      user_blog: 用户博客
+    attributes:
+      user_blog:
+        user: 用户
+        blog_item: 博客
+        blog_url: 主页地址
+        login_name: 登录名
+        login_password: 登录密码
+        is_processed: 是否绑定
+        note: 备注
+    errors:
+      user_blog: 
+  helpers:
+    user_blog: 

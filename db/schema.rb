@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130824051300) do
+ActiveRecord::Schema.define(:version => 20130827160857) do
+
+  create_table "blog_items", :force => true do |t|
+    t.integer  "cate_id",      :null => false
+    t.string   "name",         :null => false
+    t.string   "url"
+    t.string   "register_url"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "keystores", :id => false, :force => true do |t|
     t.string   "key",        :limit => 50, :default => "", :null => false
@@ -190,6 +199,21 @@ ActiveRecord::Schema.define(:version => 20130824051300) do
   end
 
   add_index "themes", ["name"], :name => "index_themes_on_name", :unique => true
+
+  create_table "user_blogs", :force => true do |t|
+    t.integer  "user_id",        :null => false
+    t.integer  "blog_item_id",   :null => false
+    t.string   "blog_url",       :null => false
+    t.string   "login_name",     :null => false
+    t.string   "login_password", :null => false
+    t.boolean  "is_processed"
+    t.string   "note"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "user_blogs", ["blog_item_id"], :name => "index_user_blogs_on_blog_item_id"
+  add_index "user_blogs", ["user_id"], :name => "index_user_blogs_on_user_id"
 
   create_table "user_details", :force => true do |t|
     t.integer  "user_id",                           :null => false

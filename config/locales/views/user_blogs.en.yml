@@ -1,0 +1,20 @@
+---
+en:
+  user_blogs:
+    index:
+      title: User blogs
+    show:
+      title: User blog
+    edit:
+      title: Editing User blog
+    new:
+      title: New User blog
+  flash:
+    user_blogs:
+      create:
+        notice: ! '%{resource_name} was successfully created.'
+      update:
+        notice: ! '%{resource_name} was successfully updated.'
+      destroy:
+        notice: ! '%{resource_name} was successfully deleted.'
+        alert: ! '%{resource_name} could not be deleted.'

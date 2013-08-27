@@ -1,0 +1,15 @@
+---
+en:
+  active_record:
+    models:
+      blog_item: Blog item
+    attributes:
+      blog_item:
+        cate_id: Cate
+        name: Name
+        url: Url
+        register_url: Register url
+    errors:
+      blog_item: 
+  helpers:
+    blog_item: 

@@ -1,0 +1,20 @@
+---
+en:
+  blog_items:
+    index:
+      title: Blog items
+    show:
+      title: Blog item
+    edit:
+      title: Editing Blog item
+    new:
+      title: New Blog item
+  flash:
+    blog_items:
+      create:
+        notice: ! '%{resource_name} was successfully created.'
+      update:
+        notice: ! '%{resource_name} was successfully updated.'
+      destroy:
+        notice: ! '%{resource_name} was successfully deleted.'
+        alert: ! '%{resource_name} could not be deleted.'

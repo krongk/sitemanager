@@ -67,7 +67,7 @@
     <%= link_to '删除', site_comment, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-warning' %></td>
   </tr>
   <tr>
-    <td colspan="7"><div class="pull-left" style="max-width: 900px;"><%= site_comment.content %></div></td>
+    <td colspan="7"><div class="pull-left" style="max-width: 900px;"><%= strip_tags(site_comment.content) %></div></td>
   </tr>
 <% end %>
 </tbody>

@@ -1,0 +1,22 @@
+<%= simple_form_for(@user_blog) do |f| %>
+  <%= f.error_notification %>
+
+  <fieldset>
+    <%#= f.association :user %>
+    <%= f.input :user_id, as: :hidden, input_html: {value: current_user.id} %>
+    <%= f.input :blog_item_id, as: :hidden, input_html: {value: params[:blog_item_id]} %>
+    <%= f.input :blog_url %>
+    <%= f.input :login_name %>
+    <%= f.input :login_password %>
+    <%= f.input :is_processed %>
+    <%= f.input :note %>
+  </fieldset>
+
+  <div class='form-actions' style='margin-bottom: 0;'>
+      <div class='text-right'>
+          <%= button_tag(type: 'submit', class: "btn btn-primary btn-large") do %>
+            <i class='icon-save'></i> 提交
+          <% end %>
+      </div>
+  </div>
+<% end %>

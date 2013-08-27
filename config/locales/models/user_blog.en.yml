@@ -1,0 +1,18 @@
+---
+en:
+  active_record:
+    models:
+      user_blog: User blog
+    attributes:
+      user_blog:
+        user: User
+        blog_item: Blog item
+        blog_url: Blog url
+        login_name: Login name
+        login_password: Login password
+        is_processed: Is processed
+        note: Note
+    errors:
+      user_blog: 
+  helpers:
+    user_blog: 

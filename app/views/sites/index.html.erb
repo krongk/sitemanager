@@ -120,7 +120,7 @@
                        <%= link_to '编辑', edit_site_post_path(item), class: "btn btn-primary" %>
                        <%= link_to '删除', item, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
                        </div>
-                       <%= item.content.strip_tags.truncate(60) %>
+                       <%= strip_tags(item.content).truncate(60) %>
                     </div>
                 </div>
             </div>
@@ -158,7 +158,7 @@
                        <%= link_to '删除', url_for([item.site, item]), class: "btn btn-danger", method: :delete, data: { confirm: '确定要删除吗?' } %>
                        </div>
                        <b><%= item.email %></b>|
-                       <%= item.content.strip_tags.truncate(200) %>
+                       <%= strip_tags(item.content).truncate(200) %>
                     </div>
                 </div>
             </div>

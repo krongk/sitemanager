@@ -1,0 +1,35 @@
+<h1>Listing user_blogs</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Blog item</th>
+    <th>Blog url</th>
+    <th>Login name</th>
+    <th>Login password</th>
+    <th>Is processed</th>
+    <th>Note</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @user_blogs.each do |user_blog| %>
+  <tr>
+    <td><%= user_blog.user %></td>
+    <td><%= user_blog.blog_item %></td>
+    <td><%= user_blog.blog_url %></td>
+    <td><%= user_blog.login_name %></td>
+    <td><%= user_blog.login_password %></td>
+    <td><%= user_blog.is_processed %></td>
+    <td><%= user_blog.note %></td>
+    <td><%= link_to 'Show', user_blog %></td>
+    <td><%= link_to 'Edit', edit_user_blog_path(user_blog) %></td>
+    <td><%= link_to 'Destroy', user_blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User blog', new_user_blog_path %>

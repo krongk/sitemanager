@@ -1,14 +1,50 @@
 <%= page_header("博客通", "博客营销") %>
 
-http://www.juxianzi.com/product/juziyue/
+<%= render :layout => "/common/box", :locals => {:color => 'blue', :title => '博客列表'} do %>
+   <table class="table table-bordered">
+    <tr>
+      <th>类型</th>
+      <th>名称</th>
+      <th>地址</th>
+      <th>注册地址</th>
+      <th></th>
+    </tr>
+
+  <% @blog_items.each do |blog_item| %>
+    <tr>
+      <td><%= BlogItem.cate_name(blog_item.cate_id) %></td>
+      <td><%= blog_item.name %></td>
+      <td><%= blog_item.url %></td>
+      <td><%= blog_item.register_url %></td>
+      <td><%= link_to '绑定', new_user_blog_path(:blog_item_id => blog_item.id), class: 'btn btn-primary' %> </td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>
 
 <hr class="hr-double">
 
- <%= box_content('博客营销') do |block| %>
-  <% block do%>
+<%= render :layout => "/common/box", :locals => {:color => 'green', :title => '已绑定博客'} do %>
+   <table class="table table-bordered">
+    <tr>
+      <th>类型</th>
+      <th>名称</th>
+      <th>地址</th>
+      <th>登录名</th>
+      <th>密码</th>
+      <th></th>
+    </tr>
 
-  	sdfs
+  <% @user_blogs.each do |user_blog| %>
+    <% blog_item = user_blog.blog_item %>
+    <tr>
+      <td><%= BlogItem.cate_name(blog_item.cate_id) %></td>
+      <td><%= blog_item.name %></td>
+      <td><%= user_blog.blog_url %></td>
+      <td><%= user_blog.login_name %></td>
+      <td><%= user_blog.login_password %></td>
+      <td><%= link_to '解绑', user_blog, method: :delete, data: { confirm: '确定解除绑定？' }, class: 'btn btn-success' %></td>
+    </tr>
   <% end %>
+  </table>
 <% end %>
-
-

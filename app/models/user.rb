@@ -19,7 +19,8 @@ class User < ActiveRecord::Base
   has_many :mail_tmps, :dependent => :destroy
   has_many :sites, :dependent => :destroy
   has_many :site_posts, :dependent => :destroy
-  
+  has_many :user_blogs, :dependent => :destroy
+
   before_create :set_default_roles
   after_create :create_user_detail
 

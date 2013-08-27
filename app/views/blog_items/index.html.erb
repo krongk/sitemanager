@@ -1,0 +1,27 @@
+<%= page_header("博客通", "博客营销") %>
+
+<%= render :layout => "/common/box", :locals => {:color => 'blue', :title => '博客营销'} do %>
+   <table class="table table-bordered">
+    <tr>
+      <th>类型</th>
+      <th>名称</th>
+      <th>地址</th>
+      <th>注册地址</th>
+      <th></th>
+    </tr>
+
+  <% @blog_items.each do |blog_item| %>
+    <tr>
+      <td><%= BlogItem.cate_name(blog_item.cate_id) %></td>
+      <td><%= blog_item.name %></td>
+      <td><%= blog_item.url %></td>
+      <td><%= blog_item.register_url %></td>
+      <td><%= link_to '修改', edit_blog_item_path(blog_item), class: 'btn btn-primary' %> <%= link_to '删除', blog_item, method: :delete, data: { confirm: '确定要删除吗?' }, class: 'btn btn-warning' %></td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>
+
+<br />
+
+<%= link_to '新增', new_blog_item_path, class: 'btn btn-primary btn-large' %>
