@@ -47,7 +47,7 @@ module ApplicationHelper
     end
 
     arr = []
-    is_processed.split("|").each do |s|
+    is_processed.split("|").reverse.each do |s|
       sms_tmp_id, send_status = s.split(',')
       flag = case send_status.to_i
       when 0 then 'success'

@@ -197,9 +197,9 @@
     <td><%= item.name.to_s.truncate(10) %></td>
     <td><%= item.source_name.to_s.truncate(12) %></td>
     <td><%= item.city.to_s.truncate(20) %></td>
-    <td><span title="<%= item.area %>"><%= item.area.to_s.truncate(8) %></span></td>
-    <td><span title="<%= item.description %>"><%= item.description.to_s.truncate(20) %></span></td>
-    <td><%= show_send_status(item.is_processed) %></td>
+    <td><span title="<%= item.area %>" class="word-break"><%= item.area.to_s.truncate(8) %></span></td>
+    <td><span title="<%= item.description %>" class="word-break"><%= item.description.to_s.truncate(12) %></span></td>
+    <td><div style="max-width: 65px;" class="word-break"><%= show_send_status(item.is_processed) %></div></td>
     <td><%= item.send_count %></td>
     <td>
     <%= link_to edit_phone_item_path(item), class: 'btn btn-success btn-mini' do %>

@@ -1,5 +1,4 @@
 /*
- *= require scaffolds
  *= require_self
 */
 
@@ -14,3 +13,15 @@
   
 }
 
+/****for word break****/
+table{
+	table-layout: fixed;
+}
+td{
+	word-break: break-all; 
+	word-wrap:break-word;
+}
+.word-break{
+	word-wrap:break-word;
+	word-break:break-all;
+}

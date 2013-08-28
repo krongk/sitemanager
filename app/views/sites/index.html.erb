@@ -108,17 +108,17 @@
             <% @site_posts.each_with_index do |item, index| %> 
             <div class='accordion-group'>
                 <div class='accordion-heading'>
-                <a class='accordion-toggle' data-parent='#accordion1' data-toggle='collapse' href='#collapse<%=index%>-accordion1'>
+                  <a class='accordion-toggle' data-parent='#accordion1' data-toggle='collapse' href='#collapse<%=index%>-accordion1'>
                     <span class="badge badge-important"><%= item.site.site_name %></span>
                     <span class="badge badge-info"><%= SitePost.cates[item.cate_id] %></span>
-                    <%= item.title %>
+                    <%= item.title.truncate(35) %>
                   </a>
                 </div>
                 <div class='accordion-body collapse' id='collapse<%=index%>-accordion1'>
                     <div class='accordion-inner'>
                        <div class="pull-right">
                        <%= link_to '编辑', edit_site_post_path(item), class: "btn btn-primary" %>
-                       <%= link_to '删除', item, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+                       <%= link_to '删除', item, class: "btn btn-danger", method: :delete, data: { confirm: '确定要删除吗?' } %>
                        </div>
                        <%= strip_tags(item.content).truncate(60) %>
                     </div>
